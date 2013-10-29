@@ -1,4 +1,4 @@
-package Test::More::WithAutoDoc;
+package Test::More::Autodoc;
 use 5.008005;
 use strict;
 use warnings;
@@ -86,15 +86,15 @@ __END__
 
 =head1 NAME
 
-Test::More::WithAutoDoc - It's new $module
+Test::More::Autodoc - It's new $module
 
 =head1 SYNOPSIS
 
-    use Test::More::WithAutoDoc;
+    use Test::More::Autodoc;
 
 =head1 DESCRIPTION
 
-Test::More::WithAutoDoc is ...
+Test::More::Autodoc is ...
 
 =head1 LICENSE
 

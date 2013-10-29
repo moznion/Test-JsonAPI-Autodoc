@@ -2,7 +2,7 @@ use strict;
 use Test::More;
 
 use_ok $_ for qw(
-    Test::More::WithAutoDoc
+    Test::More::Autodoc
 );
 
 done_testing;

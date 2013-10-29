@@ -1,14 +1,14 @@
 # NAME
 
-Test::More::WithAutoDoc - It's new $module
+Test::More::Autodoc - It's new $module
 
 # SYNOPSIS
 
-    use Test::More::WithAutoDoc;
+    use Test::More::Autodoc;
 
 # DESCRIPTION
 
-Test::More::WithAutoDoc is ...
+Test::More::Autodoc is ...
 
 # LICENSE
 
