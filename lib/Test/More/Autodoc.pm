@@ -6,8 +6,10 @@ use parent qw/Exporter/;
 use Carp;
 use Test::More ();
 use Scope::Guard;
+use JSON;
+use LWP::UserAgent;
 
-our @EXPORT = qw/describe subtest is_status/;
+our @EXPORT = qw/describe subtest http_ok/;
 
 our $VERSION = "0.01";
 
@@ -15,7 +17,7 @@ my $autodoc;
 
 my $description;
 my $context;
-my $expected_status_code;
+my $expected_code;
 
 sub describe {
     if ($description) {
@@ -51,7 +53,7 @@ sub describe {
 sub subtest {
     my $guard = sub {
         return Scope::Guard->new(sub {
-            undef $expected_status_code;
+            undef $expected_code;
         });
     }->();
 
@@ -64,20 +66,39 @@ sub subtest {
     # should file output as markdown {{{
     warn $description;
     warn $context;
-    warn $expected_status_code;
+    warn $expected_code;
     # }}}
 
     return $result;
 }
 
-sub is_status {
-    my $got = shift;
-    $expected_status_code = shift;
+sub http_ok {
+    my ($expected_code, $req) = @_;
 
-    Test::More::is $got, $expected_status_code;
+    unless ($req->isa('HTTP::Request')) {
+        return Test::More::fail; # TODO add fail message.
+    }
+
+    my $path         = $req->uri->path;
+    my $method       = $req->method;
+    my $query        = $req->uri->query;
+    my $request_body = $req->content;
+
+    if($req->content_type =~ m!^application/json!) {
+        $request_body = to_json(from_json($req->decoded_content), { pretty => 1 });
+    }
+
+    my $res = LWP::UserAgent->new->request($req);
+
+    my $result = Test::More::is $res->code, $expected_code; # TODO
+    return unless $result;
+
+    my $status_line   = $res->status_line;
+    my $response_body = $res->content;
+    if($res->content_type =~ m!^application/json!) {
+        my $response_body = to_json(from_json($res->decoded_content), { pretty => 1 });
+    }
 }
-
-
 
 1;
 __END__

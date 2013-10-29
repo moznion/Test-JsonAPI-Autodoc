@@ -53,5 +53,16 @@
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/moznion/Test-More-Autodoc/issues"
+      },
+      "homepage" : "https://github.com/moznion/Test-More-Autodoc",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/moznion/Test-More-Autodoc.git",
+         "web" : "https://github.com/moznion/Test-More-Autodoc"
+      }
+   },
    "version" : "0.01"
 }
