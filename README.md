@@ -2,6 +2,12 @@
 
 Test::More::Autodoc - It's new $module
 
+# \*\* CAUTION \*\*
+
+This module still alpha quality. DO NOT USE THIS.
+
+このモジュールは出来損ないだ。良い子は使わない事！
+
 # SYNOPSIS
 
     use Test::More::Autodoc;
