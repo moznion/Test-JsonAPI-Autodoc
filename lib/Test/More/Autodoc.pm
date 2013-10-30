@@ -8,7 +8,7 @@ use Test::More ();
 use Scope::Guard;
 use JSON;
 use LWP::UserAgent;
-use Text::Xslate;
+use Text::Xslate qw(mark_raw);;
 
 our @EXPORT = qw/describe context http_ok/;
 
@@ -86,16 +86,16 @@ sub http_ok {
     }
 
     push @$results, +{
-        context      => $context,
+        context      => mark_raw($context),
 
-        location     => $req->uri->path,
-        method       => $req->method,
-        query        => $req->uri->query,
-        parameters   => $request_body,
-        content_type => $content_type,
+        location     => mark_raw($req->uri->path),
+        method       => mark_raw($req->method),
+        query        => mark_raw($req->uri->query),
+        parameters   => mark_raw($request_body),
+        content_type => mark_raw($content_type),
 
-        status       => $expected_code,
-        response     => $response_body,
+        status       => mark_raw($expected_code),
+        response     => mark_raw($response_body),
     };
 }
 
@@ -128,11 +128,12 @@ Status: <: $result.status :>
 Response:
 <: $result.response :>
 : }
+```
 END_OF_MARKDOWN
 
     my $tx = Text::Xslate->new();
     print $tx->render_string($template, {
-        description => $description,
+        description => mark_raw($description),
         results     => $results,
     });
 }
