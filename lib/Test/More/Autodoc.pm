@@ -117,9 +117,10 @@ sub _generate_markdown {
 ### request
 
 <: $result.method:> <: $result.location :>
-
 : if $result.query {
+
     <: $result.query :>
+
 : }
 ### response
 
