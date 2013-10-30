@@ -11,8 +11,4 @@ describe "not specify 'autodoc'" => sub {
     ok 1;
 };
 
-describe 'enable', "specify 'autodoc'" => sub {
-    ok 1;
-};
-
 done_testing;

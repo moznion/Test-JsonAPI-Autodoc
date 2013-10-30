@@ -8,83 +8,70 @@ use Test::More ();
 use Scope::Guard;
 use JSON;
 use LWP::UserAgent;
+use Text::Xslate;
 
-our @EXPORT = qw/describe subtest http_ok/;
+our @EXPORT = qw/describe context http_ok/;
 
 our $VERSION = "0.01";
 
-my $autodoc;
-
-my $description;
+my $in_describe;
+my $in_context;
 my $context;
-my $expected_code;
+my $results;
 
 sub describe {
-    if ($description) {
+    if ($in_describe) {
         return Test::More::fail; # TODO add fail message.
     }
 
     my $guard = sub {
         return Scope::Guard->new(sub {
-            undef $autodoc;
-            undef $description;
+            undef $in_describe;
+            undef $results;
         });
     }->();
 
-    my $autodoc_or_description  = shift;
-    my $description_or_coderef = shift;
+    $in_describe = 1;
 
-    my $code;
-    # describe($description, $code)
-    if (ref $description_or_coderef eq 'CODE') {
-        $description = $autodoc_or_description;
-        $code        = $description_or_coderef;
-    }
-    # describe($autodoc, $description, $code)
-    else {
-        $autodoc     = $autodoc_or_description;
-        $description = $description_or_coderef;
-        $code        = shift;
-    }
+    my ($description, $coderef) = @_;
 
-    Test::More::subtest $description => $code;
+    my $result = Test::More::subtest($description => $coderef);
+
+    if ($result) {
+        _generate_markdown($description);
+    }
 }
 
-sub subtest {
+sub context {
+    if ($in_context) {
+        return Test::More::fail; # TODO add fail message.
+    }
+
     my $guard = sub {
         return Scope::Guard->new(sub {
-            undef $expected_code;
+            undef $in_context;
         });
     }->();
 
-    my ($context, $code) = @_;
+    $in_context = 1;
 
-    my $result = Test::More::subtest $context => $code;
+    $context    = shift;
+    my $coderef = shift;
 
-    return $result unless ($autodoc); # NOT generate document.
-
-    # should file output as markdown {{{
-    warn $description;
-    warn $context;
-    warn $expected_code;
-    # }}}
-
-    return $result;
+    Test::More::subtest($context => $coderef);
 }
 
 sub http_ok {
-    my ($expected_code, $req) = @_;
+    my ($req, $expected_code, $comment) = @_; # TODO comment
 
     unless ($req->isa('HTTP::Request')) {
         return Test::More::fail; # TODO add fail message.
     }
 
-    my $path         = $req->uri->path;
-    my $method       = $req->method;
-    my $query        = $req->uri->query;
     my $request_body = $req->content;
+    my $content_type = $req->content_type;
 
-    if($req->content_type =~ m!^application/json!) {
+    if($content_type =~ m!^application/json!) {
         $request_body = to_json(from_json($req->decoded_content), { pretty => 1 });
     }
 
@@ -93,11 +80,61 @@ sub http_ok {
     my $result = Test::More::is $res->code, $expected_code; # TODO
     return unless $result;
 
-    my $status_line   = $res->status_line;
     my $response_body = $res->content;
     if($res->content_type =~ m!^application/json!) {
-        my $response_body = to_json(from_json($res->decoded_content), { pretty => 1 });
+        $response_body = to_json(from_json($res->decoded_content), { pretty => 1 });
     }
+
+    push @$results, +{
+        context      => $context,
+
+        location     => $req->uri->path,
+        method       => $req->method,
+        query        => $req->uri->query,
+        parameters   => $request_body,
+        content_type => $content_type,
+
+        status       => $expected_code,
+        response     => $response_body,
+    };
+}
+
+sub _generate_markdown {
+    my ($description) = @_;
+
+    my $template = << 'END_OF_MARKDOWN';
+# <: $description :>
+
+: for $results -> $result {
+    ## <: $result.context :>
+
+    ### parameters
+
+    ```
+    <: $result.parameters :>
+    ```
+
+    ### request
+
+    <: $result.method:> <: $result.location :>
+
+    : if $result.query {
+        <: $result.query :>
+    : }
+    ### response
+
+    ```
+    Status: <: $result.status :>
+    Response:
+    <: $result.response :>
+: }
+END_OF_MARKDOWN
+
+    my $tx = Text::Xslate->new();
+    print $tx->render_string($template, {
+        description => $description,
+        results     => $results,
+    });
 }
 
 1;
