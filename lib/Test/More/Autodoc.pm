@@ -120,8 +120,8 @@ sub _generate_markdown {
 : if $result.query {
 
     <: $result.query :>
-
 : }
+
 ### response
 
 ```
