@@ -106,27 +106,27 @@ sub _generate_markdown {
 # <: $description :>
 
 : for $results -> $result {
-    ## <: $result.context :>
+## <: $result.context :>
 
-    ### parameters
+### parameters
 
-    ```
-    <: $result.parameters :>
-    ```
+```
+<: $result.parameters :>
+```
 
-    ### request
+### request
 
-    <: $result.method:> <: $result.location :>
+<: $result.method:> <: $result.location :>
 
-    : if $result.query {
-        <: $result.query :>
-    : }
-    ### response
+: if $result.query {
+    <: $result.query :>
+: }
+### response
 
-    ```
-    Status: <: $result.status :>
-    Response:
-    <: $result.response :>
+```
+Status: <: $result.status :>
+Response:
+<: $result.response :>
 : }
 END_OF_MARKDOWN
 
