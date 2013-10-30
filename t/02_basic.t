@@ -37,13 +37,8 @@ is $result, <<'...', 'result ok';
 
 ### parameters
 
-```
-{
-   "id" : 1,
-   "message" : "blah blah"
-}
-
-```
+- `id`: Number (e.g. 1)
+- `message`: String (e.g. "blah blah")
 
 ### request
 

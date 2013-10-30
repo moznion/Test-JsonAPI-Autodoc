@@ -91,12 +91,41 @@ sub http_ok {
         location     => mark_raw($req->uri->path),
         method       => mark_raw($req->method),
         query        => mark_raw($req->uri->query),
-        parameters   => mark_raw($request_body),
         content_type => mark_raw($content_type),
+        parameters   => _parse_request_parameters($request_body, $content_type),
 
         status       => mark_raw($expected_code),
         response     => mark_raw($response_body),
     };
+}
+
+sub _parse_request_parameters {
+    my ($reqest_parameters, $content_type) = @_;
+
+    my @parameters;
+    if($content_type =~ m!^application/json!) { # TODO
+        $reqest_parameters = JSON::decode_json($reqest_parameters);
+        foreach my $key (keys %$reqest_parameters) {
+            my $value = $reqest_parameters->{$key};
+            if ($value =~ /^\d/) {
+                push @parameters, mark_raw("`$key`: Number (e.g. $value)");
+            }
+            elsif (ref $value eq 'HASH') {
+                # TODO
+            }
+            elsif (ref $value eq 'Array') {
+                # TODO
+            }
+            else {
+                push @parameters, mark_raw(qq{`$key`: String (e.g. "$value")});
+            }
+        }
+    }
+    else {
+        # TODO
+    }
+
+    return \@parameters;
 }
 
 sub _generate_markdown {
@@ -110,9 +139,14 @@ sub _generate_markdown {
 
 ### parameters
 
-```
-<: $result.parameters :>
-```
+: if $result.parameters {
+: for $result.parameters -> $parameter {
+- <: $parameter :>
+: }
+: }
+: else {
+Not required
+: }
 
 ### request
 
