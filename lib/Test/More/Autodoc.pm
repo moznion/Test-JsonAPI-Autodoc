@@ -100,29 +100,43 @@ sub http_ok {
 }
 
 sub _parse_request_parameters {
-    my ($reqest_parameters, $content_type) = @_;
+    my ($request_parameters, $content_type) = @_;
 
-    my @parameters;
+    my $parameters;
     if($content_type =~ m!^application/json!) { # TODO
-        $reqest_parameters = JSON::decode_json($reqest_parameters);
-        foreach my $key (keys %$reqest_parameters) {
-            my $value = $reqest_parameters->{$key};
-            if ($value =~ /^\d/) {
-                push @parameters, mark_raw("`$key`: Number (e.g. $value)");
-            }
-            elsif (ref $value eq 'HASH') {
-                # TODO
-            }
-            elsif (ref $value eq 'Array') {
-                # TODO
-            }
-            else {
-                push @parameters, mark_raw(qq{`$key`: String (e.g. "$value")});
-            }
-        }
+        $request_parameters = JSON::decode_json($request_parameters);
+        $parameters = _parse_json_hash($request_parameters);
     }
     else {
         # TODO
+    }
+
+    return $parameters;
+}
+
+sub _parse_json_hash {
+    my ($request_parameters, $layer) = @_;
+
+    $layer = 0 unless $layer;
+
+    my $indent = '    ' x $layer;
+
+    my @parameters;
+    foreach my $key (keys %$request_parameters) {
+        my $value = $request_parameters->{$key};
+        if ($value =~ /^\d/) {
+            push @parameters, mark_raw("$indent- `$key`: Number (e.g. $value)");
+        }
+        elsif (ref $value eq 'HASH') {
+            push @parameters, mark_raw("$indent- `$key`: JSON");
+            push @parameters, @{_parse_json_hash($value, ++$layer)};
+        }
+        elsif (ref $value eq 'Array') {
+            # TODO
+        }
+        else {
+            push @parameters, mark_raw(qq{$indent- `$key`: String (e.g. "$value")});
+        }
     }
 
     return \@parameters;
@@ -141,7 +155,7 @@ sub _generate_markdown {
 
 : if $result.parameters {
 : for $result.parameters -> $parameter {
-- <: $parameter :>
+<: $parameter :>
 : }
 : }
 : else {
