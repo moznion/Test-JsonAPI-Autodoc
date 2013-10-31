@@ -24,7 +24,12 @@ my $result = capture_stdout{ # TODO
         context 'POST /foobar' => sub {
             my $req = POST '/foobar';
             $req->header('Content-Type' => 'application/json');
-            $req->content('{ "id": 1, "message": "blah blah" }');
+            $req->content(q{
+                {
+                    "id": 1,
+                    "message": "blah blah"
+                }
+            });
             http_ok($req, 200);
         };
     };
