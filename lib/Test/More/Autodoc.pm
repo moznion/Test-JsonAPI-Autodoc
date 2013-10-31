@@ -8,7 +8,8 @@ use Test::More ();
 use Scope::Guard;
 use JSON;
 use LWP::UserAgent;
-use Text::Xslate qw(mark_raw);;
+use Text::Xslate qw(mark_raw);
+use Test::More::Autodoc::Markdown;
 
 our @EXPORT = qw/describe context http_ok/;
 
@@ -38,7 +39,7 @@ sub describe {
     my $result = Test::More::subtest($description => $coderef);
 
     if ($result) {
-        _generate_markdown($description);
+        Test::More::Autodoc::Markdown->new()->generate($description, $results);
     }
 }
 
@@ -164,51 +165,6 @@ sub _parse_json_hash {
     }
 
     return \@parameters;
-}
-
-sub _generate_markdown {
-    my ($description) = @_;
-
-    my $template = << 'END_OF_MARKDOWN';
-# <: $description :>
-
-: for $results -> $result {
-## <: $result.context :>
-
-### parameters
-
-: if $result.parameters {
-: for $result.parameters -> $parameter {
-<: $parameter :>
-: }
-: }
-: else {
-Not required
-: }
-
-### request
-
-<: $result.method:> <: $result.location :>
-: if $result.query {
-
-    <: $result.query :>
-: }
-
-### response
-
-```
-Status: <: $result.status :>
-Response:
-<: $result.response :>
-: }
-```
-END_OF_MARKDOWN
-
-    my $tx = Text::Xslate->new();
-    print $tx->render_string($template, {
-        description => mark_raw($description),
-        results     => $results,
-    });
 }
 
 1;

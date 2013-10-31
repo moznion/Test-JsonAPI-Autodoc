@@ -4,6 +4,7 @@ requires 'Scope::Guard';
 requires 'Test::More', '0.98';
 requires 'Text::Xslate';
 requires 'parent';
+requires 'Data::Section::Simple';
 requires 'perl', '5.008005';
 
 on configure => sub {
