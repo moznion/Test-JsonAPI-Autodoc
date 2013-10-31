@@ -122,20 +122,44 @@ sub _parse_json_hash {
     my $indent = '    ' x $layer;
 
     my @parameters;
-    foreach my $key (keys %$request_parameters) {
-        my $value = $request_parameters->{$key};
-        if ($value =~ /^\d/) {
-            push @parameters, mark_raw("$indent- `$key`: Number (e.g. $value)");
+
+    # TODO NOT GOOD (should be extracted to each method)
+    if (ref $request_parameters eq 'HASH') {
+        foreach my $key (keys %$request_parameters) {
+            my $value = $request_parameters->{$key};
+            if ($value =~ /^\d/) {
+                push @parameters, mark_raw("$indent- `$key`: Number (e.g. $value)");
+            }
+            elsif (ref $value eq 'HASH') {
+                push @parameters, mark_raw("$indent- `$key`: JSON");
+                push @parameters, @{_parse_json_hash($value, ++$layer)};
+            }
+            elsif (ref $value eq 'ARRAY') {
+                push @parameters, mark_raw("$indent- `$key`: Array");
+                push @parameters, @{_parse_json_hash($value, ++$layer)};
+            }
+            else {
+                push @parameters, mark_raw(qq{$indent- `$key`: String (e.g. "$value")});
+            }
         }
-        elsif (ref $value eq 'HASH') {
-            push @parameters, mark_raw("$indent- `$key`: JSON");
-            push @parameters, @{_parse_json_hash($value, ++$layer)};
-        }
-        elsif (ref $value eq 'Array') {
-            # TODO
-        }
-        else {
-            push @parameters, mark_raw(qq{$indent- `$key`: String (e.g. "$value")});
+    }
+    else {
+        foreach my $value (@$request_parameters) {
+            if ($value =~ /^\d/) {
+                push @parameters, mark_raw("$indent- Number (e.g. $value)");
+            }
+            elsif (ref $value eq 'HASH') {
+                push @parameters, mark_raw("$indent- Anonymous JSON");
+                push @parameters, @{_parse_json_hash($value, ++$layer)};
+            }
+            elsif (ref $value eq 'ARRAY') {
+                push @parameters, mark_raw("$indent- Anonymous Array");
+                push @parameters, @{_parse_json_hash($value, ++$layer)};
+            }
+            else {
+                push @parameters, mark_raw(qq{$indent- String (e.g. "$value")});
+            }
+            $layer--;
         }
     }
 
