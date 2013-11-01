@@ -7,6 +7,7 @@ requires 'parent';
 requires 'Data::Section::Simple';
 requires 'Path::Tiny';
 requires 'Time::Piece';
+requires 'URL::Encode';
 requires 'perl', '5.008005';
 
 on configure => sub {

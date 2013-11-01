@@ -50,6 +50,8 @@
             "Scope::Guard" : "0",
             "Test::More" : "0.98",
             "Text::Xslate" : "0",
+            "Time::Piece" : "0",
+            "URL::Encode" : "0",
             "parent" : "0",
             "perl" : "5.008005"
          }

@@ -8,6 +8,7 @@ use Test::More ();
 use Scope::Guard;
 use JSON;
 use LWP::UserAgent;
+use URL::Encode qw/url_params_flat/;
 use Test::More::Autodoc::Markdown;
 
 our @EXPORT = qw/describe http_ok set_documents_path/;
@@ -98,7 +99,9 @@ sub _parse_request_parameters {
         $parameters = _parse_json_hash($request_parameters);
     }
     else {
-        # TODO
+        my @keys = keys {@{url_params_flat($request_parameters)}};
+        @keys = sort {$a cmp $b} @keys;
+        $parameters = [map {"- `$_`"} @keys];
     }
 
     return $parameters;
