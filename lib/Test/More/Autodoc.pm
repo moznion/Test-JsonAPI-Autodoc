@@ -3,7 +3,6 @@ use 5.008005;
 use strict;
 use warnings;
 use parent qw/Exporter/;
-use Carp;
 use Test::More ();
 use Scope::Guard;
 use JSON;
