@@ -22,3 +22,10 @@ on test => sub {
     requires 'HTTP::Response';
     requires 'Test::Mock::LWP::Conditional';
 };
+
+on develop => sub {
+    requires 'Test::LocalFunctions';
+    requires 'Test::Perl::Critic';
+    requires 'Test::UsedModules';
+    requires 'Test::Vars';
+};
