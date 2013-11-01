@@ -11,7 +11,6 @@ use Test::Mock::LWP::Conditional;
 
 use Test::More;
 use Test::More::Autodoc;
-use Capture::Tiny qw/capture_stdout/;
 
 my $res = HTTP::Response->new(200);
 $res->content('{ "message" : "success" }');
@@ -21,24 +20,22 @@ Test::Mock::LWP::Conditional->stub_request(
     "/foobar" => $res
 );
 
-my $result = capture_stdout{ # TODO
-    describe 'POST /foobar' => sub {
-        my $req = POST '/foobar';
-        $req->header('Content-Type' => 'application/json');
-        $req->content(q{
-            {
-                "id": 1,
-                "parent": {
-                    "child": {
-                        "article_id": 123,
-                        "text": "foobar"
-                    }
-                },
-                "message": "hello"
-            }
-        });
-        http_ok($req, 200, "get message");
-    };
+describe 'POST /foobar' => sub {
+    my $req = POST '/foobar';
+    $req->header('Content-Type' => 'application/json');
+    $req->content(q{
+        {
+            "id": 1,
+            "parent": {
+                "child": {
+                    "article_id": 123,
+                    "text": "foobar"
+                }
+            },
+            "message": "hello"
+        }
+    });
+    http_ok($req, 200, "get message");
 };
 
 (my $filename = path($0)->basename) =~ s/\.t$//;

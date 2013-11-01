@@ -15,7 +15,6 @@ on configure => sub {
 };
 
 on test => sub {
-    requires 'Capture::Tiny';
     requires 'HTTP::Request::Common';
     requires 'HTTP::Response';
     requires 'Test::Mock::LWP::Conditional';

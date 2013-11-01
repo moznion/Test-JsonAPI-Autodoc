@@ -56,7 +56,6 @@
       },
       "test" : {
          "requires" : {
-            "Capture::Tiny" : "0",
             "HTTP::Request::Common" : "0",
             "HTTP::Response" : "0",
             "Test::Mock::LWP::Conditional" : "0"
