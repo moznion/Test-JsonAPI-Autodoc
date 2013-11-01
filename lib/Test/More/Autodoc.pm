@@ -17,6 +17,11 @@ our $VERSION = "0.01";
 
 my $in_describe;
 my $results;
+my $first_time;
+
+BEGIN {
+    my $first_time = 1;
+}
 
 sub describe {
     if ($in_describe) {
@@ -37,8 +42,10 @@ sub describe {
     my $result = Test::More::subtest($description => $coderef);
 
     if ($result) {
-        Test::More::Autodoc::Markdown->new()->generate($description, $results);
+        Test::More::Autodoc::Markdown->new()->generate($description, $results, $first_time);
     }
+
+    undef $first_time;
 }
 
 sub http_ok {

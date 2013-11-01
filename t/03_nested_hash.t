@@ -3,8 +3,10 @@
 use strict;
 use warnings;
 use utf8;
+use FindBin;
 use HTTP::Request::Common;
 use HTTP::Response;
+use Path::Tiny;
 use Test::Mock::LWP::Conditional;
 
 use Test::More;
@@ -39,7 +41,16 @@ my $result = capture_stdout{ # TODO
     };
 };
 
-is $result, <<'...', 'result ok';
+(my $filename = path($0)->basename) =~ s/\.t$//;
+$filename .= '.md';
+my $fh = path("$FindBin::Bin/../doc/$filename")->openr_utf8;
+
+my $got      = do { local $/; <$fh> };
+my $expected = do { local $/; <DATA> };
+is $got, $expected, 'result ok';
+
+done_testing;
+__DATA__
 ## POST /foobar
 
 get message
@@ -67,6 +78,3 @@ Response:
 }
 
 ```
-...
-
-done_testing;
