@@ -32,6 +32,7 @@ sub describe {
         return Scope::Guard->new(sub {
             undef $in_describe;
             undef $results;
+            undef $first_time;
         });
     }->();
 
@@ -44,8 +45,6 @@ sub describe {
     if ($result) {
         Test::More::Autodoc::Markdown->new()->generate($description, $results, $first_time);
     }
-
-    undef $first_time;
 }
 
 sub http_ok {
