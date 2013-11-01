@@ -1,21 +1,32 @@
 [![Build Status](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc)
 # NAME
 
-Test::JsonAPI::Autodoc - It's new $module
+Test::JsonAPI::Autodoc - Test API response and auto generate API documents
 
-# \*\* CAUTION \*\*
 
-This module still alpha quality. DO NOT USE THIS.
-
-このモジュールは出来損ないだ。良い子は使わない事！
 
 # SYNOPSIS
 
     use Test::JsonAPI::Autodoc;
+    use Test::More;
+
+    describe 'POST /foobar' => sub {
+        my $req = POST '/foobar';
+        $req->header('Content-Type' => 'application/json');
+        $req->content(q{
+            {
+                "id": 1,
+                "message": "blah blah"
+            }
+        });
+        http_ok($req, 200, "returns response");
+    };
 
 # DESCRIPTION
 
-Test::JsonAPI::Autodoc is ...
+TBD
+
+__THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.__
 
 # LICENSE
 

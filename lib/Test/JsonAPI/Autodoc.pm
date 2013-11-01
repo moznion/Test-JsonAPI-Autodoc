@@ -169,21 +169,31 @@ __END__
 
 =head1 NAME
 
-Test::JsonAPI::Autodoc - It's new $module
+Test::JsonAPI::Autodoc - Test API response and auto generate API documents
 
-=head1 ** CAUTION **
-
-This module still alpha quality. DO NOT USE THIS.
-
-このモジュールは出来損ないだ。良い子は使わない事！
 
 =head1 SYNOPSIS
 
     use Test::JsonAPI::Autodoc;
+    use Test::More;
+
+    describe 'POST /foobar' => sub {
+        my $req = POST '/foobar';
+        $req->header('Content-Type' => 'application/json');
+        $req->content(q{
+            {
+                "id": 1,
+                "message": "blah blah"
+            }
+        });
+        http_ok($req, 200, "returns response");
+    };
 
 =head1 DESCRIPTION
 
-Test::JsonAPI::Autodoc is ...
+TBD
+
+B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.>
 
 =head1 LICENSE
 

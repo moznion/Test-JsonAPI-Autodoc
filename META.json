@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "Test API response and auto generate API documents",
    "author" : [
       "moznion <moznion@gmail.com>"
    ],
