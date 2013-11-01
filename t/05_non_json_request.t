@@ -53,6 +53,8 @@ get 200 ok
 
 ### parameters
 
+__application/x-www-form-urlencoded__
+
 - `id`
 - `message`
 

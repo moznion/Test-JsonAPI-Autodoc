@@ -78,6 +78,8 @@ get message ok
 
 ### parameters
 
+__application/json__
+
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
@@ -101,6 +103,8 @@ Response:
 get 400 ok
 
 ### parameters
+
+__application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")

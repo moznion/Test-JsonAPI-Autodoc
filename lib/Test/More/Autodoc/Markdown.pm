@@ -5,6 +5,7 @@ use utf8;
 use Data::Section::Simple;
 use Time::Piece;
 use Text::Xslate qw(mark_raw);
+use Text::Xslate::Bridge::Star;
 use Test::More::Autodoc::Path;
 
 sub new {
@@ -24,6 +25,7 @@ sub generate {
     my $tx    = Text::Xslate->new(
         type => 'text',
         path => [$vpath],
+        module => ['Text::Xslate::Bridge::Star'],
     );
 
     my $fh;
@@ -59,6 +61,13 @@ generated at: <: $generated_at :>
 ### parameters
 
 : if $result.parameters {
+    : if $result.content_type.match(rx('^application/json')) {
+__application/json__
+    : }
+    : else {
+__application/x-www-form-urlencoded__
+    : }
+
 : for $result.parameters -> $parameter {
 <: $parameter :>
 : }

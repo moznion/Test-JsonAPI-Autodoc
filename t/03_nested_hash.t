@@ -64,6 +64,8 @@ get message
 
 ### parameters
 
+__application/json__
+
 - `parent`: JSON
     - `child`: JSON
         - `article_id`: Number (e.g. 123)

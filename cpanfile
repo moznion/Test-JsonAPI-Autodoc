@@ -3,6 +3,7 @@ requires 'LWP::UserAgent';
 requires 'Scope::Guard';
 requires 'Test::More', '0.98';
 requires 'Text::Xslate';
+requires 'Text::Xslate::Bridge::Star';
 requires 'parent';
 requires 'Data::Section::Simple';
 requires 'Path::Tiny';

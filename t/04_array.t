@@ -83,6 +83,8 @@ get message
 
 ### parameters
 
+__application/json__
+
 - `id`: Number (e.g. 1)
 - `parent_array`: Array
     - Anonymous Array
