@@ -10,7 +10,7 @@ use JSON;
 use LWP::UserAgent;
 use Test::More::Autodoc::Markdown;
 
-our @EXPORT = qw/describe http_ok/;
+our @EXPORT = qw/describe http_ok set_documents_path/;
 
 our $VERSION = "0.01";
 
@@ -85,7 +85,7 @@ sub http_ok {
     };
 }
 
-sub set_output_documents_path {
+sub set_documents_path {
     $output_path = shift;
 }
 

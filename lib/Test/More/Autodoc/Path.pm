@@ -37,15 +37,23 @@ sub document_path {
     my ($class, $output_path) = @_;
 
     (my $document_name = $FindBin::Script) =~ s/\.t$//;
-    my $markdown_path = "doc/$document_name.md";
+    my $markdown_file = "$document_name.md";
 
     my $document_path;
     if ($output_path) {
-        $document_path = path($FindBin::Bin)->child("$output_path/$markdown_path");
+        if ($output_path =~ m!^/!) {
+            # Absolute path
+            $document_path = path($output_path)->child($markdown_file);
+        }
+        else {
+            # Relative path
+            $document_path = path($FindBin::Bin)->child("$output_path/$markdown_file");
+        }
     }
     else {
+        # Default
         my $project_root_path = __PACKAGE__->find_project_root_path;
-        $document_path = $project_root_path->child($markdown_path);
+        $document_path = $project_root_path->child("doc/$markdown_file");
     }
 
     $document_path->touchpath;

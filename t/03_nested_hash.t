@@ -16,6 +16,9 @@ BEGIN {
     $ENV{TEST_MORE_AUTODOC} = 1;
 }
 
+my $tempdir = Path::Tiny->tempdir;
+set_documents_path($tempdir);
+
 my $res = HTTP::Response->new(200);
 $res->content('{ "message" : "success" }');
 $res->content_type('application/json');
@@ -44,7 +47,7 @@ describe 'POST /foobar' => sub {
 
 (my $filename = path($0)->basename) =~ s/\.t$//;
 $filename .= '.md';
-my $fh = path("$FindBin::Bin/../doc/$filename")->openr_utf8;
+my $fh = path("$tempdir/$filename")->openr_utf8;
 
 my $got      = do { local $/; <$fh> };
 my $expected = do { local $/; <DATA> };
