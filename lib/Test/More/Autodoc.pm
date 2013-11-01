@@ -3,6 +3,7 @@ use 5.008005;
 use strict;
 use warnings;
 use parent qw/Exporter/;
+use Carp;
 use Test::More ();
 use Scope::Guard;
 use JSON;
@@ -25,7 +26,7 @@ BEGIN {
 
 sub describe {
     if ($in_describe) {
-        return Test::More::fail; # TODO add fail message.
+        croak '`describe` must not call as nesting';
     }
 
     my $guard = sub {
@@ -51,7 +52,7 @@ sub http_ok {
     my ($req, $expected_code, $comment) = @_;
 
     unless ($req->isa('HTTP::Request')) {
-        return Test::More::fail; # TODO add fail message.
+        croak 'Request must be instance of HTTP::Request or subclass of that';
     }
 
     my $request_body = $req->content;
@@ -63,7 +64,7 @@ sub http_ok {
 
     my $res = LWP::UserAgent->new->request($req);
 
-    my $result = Test::More::is $res->code, $expected_code; # TODO
+    my $result = Test::More::is $res->code, $expected_code;
     return unless $result;
 
     my $response_body = $res->content;
