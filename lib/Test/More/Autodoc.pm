@@ -99,9 +99,10 @@ sub _parse_request_parameters {
         $parameters = _parse_json_hash($request_parameters);
     }
     else {
-        my @keys = keys {@{url_params_flat($request_parameters)}};
-        @keys = sort {$a cmp $b} @keys;
-        $parameters = [map {"- `$_`"} @keys];
+        my @parameters = @{url_params_flat($request_parameters)};
+        my @keys = @parameters[ grep { ! ($_ % 2) } 0 .. $#parameters ];
+        @parameters = map { "- `$_`" } @keys;
+        $parameters = \@parameters;
     }
 
     return $parameters;
