@@ -11,13 +11,11 @@ use LWP::UserAgent;
 use Text::Xslate qw(mark_raw);
 use Test::More::Autodoc::Markdown;
 
-our @EXPORT = qw/describe context http_ok/;
+our @EXPORT = qw/describe http_ok/;
 
 our $VERSION = "0.01";
 
 my $in_describe;
-my $in_context;
-my $context;
 my $results;
 
 sub describe {
@@ -41,25 +39,6 @@ sub describe {
     if ($result) {
         Test::More::Autodoc::Markdown->new()->generate($description, $results);
     }
-}
-
-sub context {
-    if ($in_context) {
-        return Test::More::fail; # TODO add fail message.
-    }
-
-    my $guard = sub {
-        return Scope::Guard->new(sub {
-            undef $in_context;
-        });
-    }->();
-
-    $in_context = 1;
-
-    $context    = shift;
-    my $coderef = shift;
-
-    Test::More::subtest($context => $coderef);
 }
 
 sub http_ok {
@@ -87,7 +66,7 @@ sub http_ok {
     }
 
     push @$results, +{
-        context      => mark_raw($context),
+        comment      => mark_raw($comment),
 
         location     => mark_raw($req->uri->path),
         method       => mark_raw($req->method),

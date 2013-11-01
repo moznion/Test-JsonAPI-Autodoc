@@ -6,9 +6,10 @@ use Text::Xslate qw(mark_raw);
 use Data::Section::Simple;
 
 sub new {
-    my ($class) = @_;
+    my ($class, $output_path) = @_;
 
     bless {
+        output_path => $output_path,
     }, $class;
 }
 
@@ -29,10 +30,10 @@ sub generate {
 
 __DATA__
 @@ document.json.tx
-# <: $description :>
+## <: $description :>
 
 : for $results -> $result {
-## <: $result.context :>
+<: $result.comment :>
 
 ### parameters
 

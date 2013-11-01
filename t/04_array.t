@@ -20,49 +20,47 @@ Test::Mock::LWP::Conditional->stub_request(
 );
 
 my $result = capture_stdout{ # TODO
-    describe 'Output Status Code Rightly' => sub {
-        context 'POST /foobar' => sub {
-            my $req = POST '/foobar';
-            $req->header('Content-Type' => 'application/json');
-            $req->content(q{
-                {
-                    "id": 1,
-                    "parent_array": [
-                        [
-                            {
-                                "article": {
-                                    "article_id": 123,
-                                    "text": "foobar"
-                                }
-                            },
-                            {
-                                "article": {
-                                    "article_id": 456,
-                                    "text": "bazqux"
-                                }
-                            },
-                            {
-                                "article": {
-                                    "article_id": 999,
-                                    "text": "hogefuga"
-                                }
-                            },
-                            "Hachioji.pm",
-                            42
-                        ]
-                    ],
-                    "message": "hello"
-                }
-            });
-            http_ok($req, 200);
-        };
+    describe 'POST /foobar' => sub {
+        my $req = POST '/foobar';
+        $req->header('Content-Type' => 'application/json');
+        $req->content(q{
+            {
+                "id": 1,
+                "parent_array": [
+                    [
+                        {
+                            "article": {
+                                "article_id": 123,
+                                "text": "foobar"
+                            }
+                        },
+                        {
+                            "article": {
+                                "article_id": 456,
+                                "text": "bazqux"
+                            }
+                        },
+                        {
+                            "article": {
+                                "article_id": 999,
+                                "text": "hogefuga"
+                            }
+                        },
+                        "Hachioji.pm",
+                        42
+                    ]
+                ],
+                "message": "hello"
+            }
+        });
+        http_ok($req, 200, 'get message');
     };
 };
 
 is $result, <<'...', 'result ok';
-# Output Status Code Rightly
-
 ## POST /foobar
+
+get message
 
 ### parameters
 
