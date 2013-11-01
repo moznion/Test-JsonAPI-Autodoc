@@ -41,8 +41,7 @@ sub document_path {
 
     my $document_path;
     if ($output_path) {
-        my $relative_path = "$FindBin::Bin/$output_path";
-        $document_path    = path($relative_path)->child($markdown_path);
+        $document_path = path($FindBin::Bin)->child("$output_path/$markdown_path");
     }
     else {
         my $project_root_path = __PACKAGE__->find_project_root_path;
@@ -50,6 +49,8 @@ sub document_path {
     }
 
     $document_path->touchpath;
+
+    return $document_path;
 }
 
 1;

@@ -17,6 +17,7 @@ our $VERSION = "0.01";
 my $in_describe;
 my $results;
 my $first_time;
+my $output_path;
 
 BEGIN {
     $first_time = 1;
@@ -42,7 +43,7 @@ sub describe {
     my $result = Test::More::subtest($description => $coderef);
 
     if ($result && $ENV{TEST_MORE_AUTODOC}) {
-        Test::More::Autodoc::Markdown->new()->generate($description, $results, $first_time);
+        Test::More::Autodoc::Markdown->new($output_path)->generate($description, $results, $first_time);
     }
 }
 
@@ -82,6 +83,10 @@ sub http_ok {
         status       => $expected_code,
         response     => $response_body,
     };
+}
+
+sub set_output_documents_path {
+    $output_path = shift;
 }
 
 sub _parse_request_parameters {
