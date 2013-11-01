@@ -5,12 +5,12 @@ use warnings;
 use utf8;
 use FindBin;
 use Path::Tiny;
-use Test::More::Autodoc::Path;
+use Test::JsonAPI::Autodoc::Path;
 
 use Test::More;
 
 subtest 'relative path' => sub {
-    my $got = Test::More::Autodoc::Path->document_path("$FindBin::Bin/../doc");
+    my $got = Test::JsonAPI::Autodoc::Path->document_path("$FindBin::Bin/../doc");
 
     (my $filename = path($0)->basename) =~ s/\.t$//;
     my $expected = path($FindBin::Bin)->parent->child("doc/$filename.md");
@@ -21,7 +21,7 @@ subtest 'relative path' => sub {
 };
 
 subtest 'default' => sub {
-    my $got = Test::More::Autodoc::Path->document_path();
+    my $got = Test::JsonAPI::Autodoc::Path->document_path();
 
     (my $filename = path($0)->basename) =~ s/\.t$//;
     my $expected = path($FindBin::Bin)->parent->child("doc/$filename.md");
@@ -32,7 +32,7 @@ subtest 'default' => sub {
 };
 
 subtest 'home dir path' => sub {
-    my $got = Test::More::Autodoc::Path->document_path('~/.test_jsonapi_autodoc_test_XXXXX');
+    my $got = Test::JsonAPI::Autodoc::Path->document_path('~/.test_jsonapi_autodoc_test_XXXXX');
 
     (my $filename = path($0)->basename) =~ s/\.t$//;
     my $expected = path($ENV{HOME})->child(".test_jsonapi_autodoc_test_XXXXX/$filename.md");

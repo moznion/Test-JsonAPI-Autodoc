@@ -23,8 +23,8 @@ my %args = (
         'Module::Build' => 0.38,
     },
 
-    name            => 'Test-More-Autodoc',
-    module_name     => 'Test::More::Autodoc',
+    name            => 'Test-JsonAPI-Autodoc',
+    module_name     => 'Test::JsonAPI::Autodoc',
     allow_pureperl => 0,
 
     script_files => [glob('script/*'), glob('bin/*')],

@@ -10,7 +10,7 @@ use Path::Tiny;
 use Test::Mock::LWP::Conditional;
 
 use Test::More;
-use Test::More::Autodoc;
+use Test::JsonAPI::Autodoc;
 
 BEGIN {
     $ENV{TEST_MORE_AUTODOC} = 1;

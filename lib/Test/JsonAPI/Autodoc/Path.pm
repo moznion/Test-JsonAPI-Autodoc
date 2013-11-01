@@ -1,4 +1,4 @@
-package Test::More::Autodoc::Path;
+package Test::JsonAPI::Autodoc::Path;
 use strict;
 use warnings;
 use utf8;

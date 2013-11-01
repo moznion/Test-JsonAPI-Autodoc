@@ -1,7 +1,7 @@
-[![Build Status](https://travis-ci.org/moznion/Test-More-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-More-Autodoc)
+[![Build Status](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc)
 # NAME
 
-Test::More::Autodoc - It's new $module
+Test::JsonAPI::Autodoc - It's new $module
 
 # \*\* CAUTION \*\*
 
@@ -11,11 +11,11 @@ This module still alpha quality. DO NOT USE THIS.
 
 # SYNOPSIS
 
-    use Test::More::Autodoc;
+    use Test::JsonAPI::Autodoc;
 
 # DESCRIPTION
 
-Test::More::Autodoc is ...
+Test::JsonAPI::Autodoc is ...
 
 # LICENSE
 

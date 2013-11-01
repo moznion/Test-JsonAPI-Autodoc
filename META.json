@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : "2"
    },
-   "name" : "Test-More-Autodoc",
+   "name" : "Test-JsonAPI-Autodoc",
    "no_index" : {
       "directory" : [
          "t",
@@ -72,13 +72,13 @@
    "release_status" : "unstable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/moznion/Test-More-Autodoc/issues"
+         "web" : "https://github.com/moznion/Test-JsonAPI-Autodoc/issues"
       },
-      "homepage" : "https://github.com/moznion/Test-More-Autodoc",
+      "homepage" : "https://github.com/moznion/Test-JsonAPI-Autodoc",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/moznion/Test-More-Autodoc",
-         "web" : "https://github.com/moznion/Test-More-Autodoc"
+         "url" : "git://github.com/moznion/Test-JsonAPI-Autodoc",
+         "web" : "https://github.com/moznion/Test-JsonAPI-Autodoc"
       }
    },
    "version" : "0.01"

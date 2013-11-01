@@ -1,4 +1,4 @@
-package Test::More::Autodoc;
+package Test::JsonAPI::Autodoc;
 use 5.008005;
 use strict;
 use warnings;
@@ -9,7 +9,7 @@ use Scope::Guard;
 use JSON;
 use LWP::UserAgent;
 use URL::Encode qw/url_params_flat/;
-use Test::More::Autodoc::Markdown;
+use Test::JsonAPI::Autodoc::Markdown;
 
 our @EXPORT = qw/describe http_ok set_documents_path/;
 
@@ -44,7 +44,7 @@ sub describe {
     my $result = Test::More::subtest($description => $coderef);
 
     if ($result && $ENV{TEST_MORE_AUTODOC}) {
-        Test::More::Autodoc::Markdown->new($output_path)->generate($description, $results, $first_time);
+        Test::JsonAPI::Autodoc::Markdown->new($output_path)->generate($description, $results, $first_time);
     }
 }
 
@@ -169,7 +169,7 @@ __END__
 
 =head1 NAME
 
-Test::More::Autodoc - It's new $module
+Test::JsonAPI::Autodoc - It's new $module
 
 =head1 ** CAUTION **
 
@@ -179,11 +179,11 @@ This module still alpha quality. DO NOT USE THIS.
 
 =head1 SYNOPSIS
 
-    use Test::More::Autodoc;
+    use Test::JsonAPI::Autodoc;
 
 =head1 DESCRIPTION
 
-Test::More::Autodoc is ...
+Test::JsonAPI::Autodoc is ...
 
 =head1 LICENSE
 
