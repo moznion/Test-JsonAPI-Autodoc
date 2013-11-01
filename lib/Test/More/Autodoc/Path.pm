@@ -41,7 +41,7 @@ sub document_path {
 
     my $document_path;
     if ($output_path) {
-        if ($output_path =~ m!^/!) {
+        if ($output_path =~ m!^~?/!) {
             # Absolute path
             $document_path = path($output_path)->child($markdown_file);
         }
