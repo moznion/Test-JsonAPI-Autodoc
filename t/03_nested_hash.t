@@ -12,6 +12,10 @@ use Test::Mock::LWP::Conditional;
 use Test::More;
 use Test::More::Autodoc;
 
+BEGIN {
+    $ENV{TEST_MORE_AUTODOC} = 1;
+}
+
 my $res = HTTP::Response->new(200);
 $res->content('{ "message" : "success" }');
 $res->content_type('application/json');

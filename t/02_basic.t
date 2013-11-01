@@ -12,6 +12,11 @@ use Test::Mock::LWP::Conditional;
 use Test::More;
 use Test::More::Autodoc;
 
+BEGIN {
+    $ENV{TEST_MORE_AUTODOC} = 1;
+}
+
+
 my $ok_res = HTTP::Response->new(200);
 $ok_res->content('{ "message" : "success" }');
 $ok_res->content_type('application/json');

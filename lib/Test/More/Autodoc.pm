@@ -41,13 +41,13 @@ sub describe {
 
     my $result = Test::More::subtest($description => $coderef);
 
-    if ($result) {
+    if ($result && $ENV{TEST_MORE_AUTODOC}) {
         Test::More::Autodoc::Markdown->new()->generate($description, $results, $first_time);
     }
 }
 
 sub http_ok {
-    my ($req, $expected_code, $comment) = @_; # TODO comment
+    my ($req, $expected_code, $comment) = @_;
 
     unless ($req->isa('HTTP::Request')) {
         return Test::More::fail; # TODO add fail message.
