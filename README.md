@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/moznion/Test-More-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-More-Autodoc)
 # NAME
 
 Test::More::Autodoc - It's new $module

@@ -43,12 +43,23 @@
       },
       "runtime" : {
          "requires" : {
+            "Data::Section::Simple" : "0",
+            "JSON" : "0",
+            "LWP::UserAgent" : "0",
+            "Path::Tiny" : "0",
+            "Scope::Guard" : "0",
+            "Test::More" : "0.98",
+            "Text::Xslate" : "0",
+            "parent" : "0",
             "perl" : "5.008005"
          }
       },
       "test" : {
          "requires" : {
-            "Test::More" : "0.98"
+            "Capture::Tiny" : "0",
+            "HTTP::Request::Common" : "0",
+            "HTTP::Response" : "0",
+            "Test::Mock::LWP::Conditional" : "0"
          }
       }
    },
@@ -60,7 +71,7 @@
       "homepage" : "https://github.com/moznion/Test-More-Autodoc",
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/moznion/Test-More-Autodoc.git",
+         "url" : "git://github.com/moznion/Test-More-Autodoc",
          "web" : "https://github.com/moznion/Test-More-Autodoc"
       }
    },
