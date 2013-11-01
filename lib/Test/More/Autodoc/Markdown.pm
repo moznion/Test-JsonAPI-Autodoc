@@ -20,7 +20,10 @@ sub generate {
     my $document_path = Test::More::Autodoc::Path->document_path($self->{output_path});
 
     my $vpath = Data::Section::Simple->new()->get_data_section();
-    my $tx    = Text::Xslate->new(path => [$vpath]);
+    my $tx    = Text::Xslate->new(
+        type => 'text',
+        path => [$vpath],
+    );
 
     my $fh;
     if ($first_time) {
@@ -31,7 +34,7 @@ sub generate {
     }
 
     print $fh $tx->render('document.json.tx', {
-        description => mark_raw($description),
+        description => $description,
         results     => $results,
     });
     close $fh;

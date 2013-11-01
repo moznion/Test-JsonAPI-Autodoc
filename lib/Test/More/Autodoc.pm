@@ -8,7 +8,6 @@ use Test::More ();
 use Scope::Guard;
 use JSON;
 use LWP::UserAgent;
-use Text::Xslate qw(mark_raw);
 use Test::More::Autodoc::Markdown;
 
 our @EXPORT = qw/describe http_ok/;
@@ -72,16 +71,16 @@ sub http_ok {
     }
 
     push @$results, +{
-        comment      => mark_raw($comment),
+        comment      => $comment,
 
-        location     => mark_raw($req->uri->path),
-        method       => mark_raw($req->method),
-        query        => mark_raw($req->uri->query),
-        content_type => mark_raw($content_type),
+        location     => $req->uri->path,
+        method       => $req->method,
+        query        => $req->uri->query,
+        content_type => $content_type,
         parameters   => _parse_request_parameters($request_body, $content_type),
 
-        status       => mark_raw($expected_code),
-        response     => mark_raw($response_body),
+        status       => $expected_code,
+        response     => $response_body,
     };
 }
 
@@ -114,36 +113,36 @@ sub _parse_json_hash {
         foreach my $key (keys %$request_parameters) {
             my $value = $request_parameters->{$key};
             if ($value =~ /^\d/) {
-                push @parameters, mark_raw("$indent- `$key`: Number (e.g. $value)");
+                push @parameters, "$indent- `$key`: Number (e.g. $value)";
             }
             elsif (ref $value eq 'HASH') {
-                push @parameters, mark_raw("$indent- `$key`: JSON");
+                push @parameters, "$indent- `$key`: JSON";
                 push @parameters, @{_parse_json_hash($value, ++$layer)};
             }
             elsif (ref $value eq 'ARRAY') {
-                push @parameters, mark_raw("$indent- `$key`: Array");
+                push @parameters, "$indent- `$key`: Array";
                 push @parameters, @{_parse_json_hash($value, ++$layer)};
             }
             else {
-                push @parameters, mark_raw(qq{$indent- `$key`: String (e.g. "$value")});
+                push @parameters, qq{$indent- `$key`: String (e.g. "$value")};
             }
         }
     }
     else {
         foreach my $value (@$request_parameters) {
             if ($value =~ /^\d/) {
-                push @parameters, mark_raw("$indent- Number (e.g. $value)");
+                push @parameters, "$indent- Number (e.g. $value)";
             }
             elsif (ref $value eq 'HASH') {
-                push @parameters, mark_raw("$indent- Anonymous JSON");
+                push @parameters, "$indent- Anonymous JSON";
                 push @parameters, @{_parse_json_hash($value, ++$layer)};
             }
             elsif (ref $value eq 'ARRAY') {
-                push @parameters, mark_raw("$indent- Anonymous Array");
+                push @parameters, "$indent- Anonymous Array";
                 push @parameters, @{_parse_json_hash($value, ++$layer)};
             }
             else {
-                push @parameters, mark_raw(qq{$indent- String (e.g. "$value")});
+                push @parameters, qq{$indent- String (e.g. "$value")};
             }
             $layer--;
         }
