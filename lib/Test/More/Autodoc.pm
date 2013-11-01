@@ -20,7 +20,7 @@ my $results;
 my $first_time;
 
 BEGIN {
-    my $first_time = 1;
+    $first_time = 1;
 }
 
 sub describe {

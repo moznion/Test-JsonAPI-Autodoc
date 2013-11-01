@@ -24,10 +24,10 @@ sub generate {
 
     my $fh;
     if ($first_time) {
-        $fh = $document_path->opena_utf8( { locked => 1 } );
+        $fh = $document_path->openw_utf8( { locked => 1 } );
     }
     else {
-        $fh = $document_path->openw_utf8( { locked => 1 } );
+        $fh = $document_path->opena_utf8( { locked => 1 } );
     }
 
     print $fh $tx->render('document.json.tx', {
@@ -72,3 +72,4 @@ Response:
 <: $result.response :>
 : }
 ```
+
