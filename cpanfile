@@ -6,6 +6,7 @@ requires 'Text::Xslate';
 requires 'parent';
 requires 'Data::Section::Simple';
 requires 'Path::Tiny';
+requires 'Time::Piece';
 requires 'perl', '5.008005';
 
 on configure => sub {

@@ -3,6 +3,7 @@ use strict;
 use warnings;
 use utf8;
 use Data::Section::Simple;
+use Time::Piece;
 use Text::Xslate qw(mark_raw);
 use Test::More::Autodoc::Path;
 
@@ -26,16 +27,19 @@ sub generate {
     );
 
     my $fh;
+    my $generated_at;
     if ($first_time) {
         $fh = $document_path->openw_utf8( { locked => 1 } );
+        $generated_at = localtime->strftime('%Y-%m-%d %H:%M:%S');
     }
     else {
         $fh = $document_path->opena_utf8( { locked => 1 } );
     }
 
     print $fh $tx->render('document.json.tx', {
-        description => $description,
-        results     => $results,
+        generated_at => $generated_at,
+        description  => $description,
+        results      => $results,
     });
     close $fh;
 }
@@ -43,6 +47,10 @@ sub generate {
 
 __DATA__
 @@ document.json.tx
+: if $generated_at {
+generated at: <: $generated_at :>
+
+: }
 ## <: $description :>
 
 : for $results -> $result {

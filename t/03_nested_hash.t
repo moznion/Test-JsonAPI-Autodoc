@@ -49,6 +49,9 @@ describe 'POST /foobar' => sub {
 $filename .= '.md';
 my $fh = path("$tempdir/$filename")->openr_utf8;
 
+chomp (my $generated_at_line = <$fh>);
+<$fh>; # blank
+like $generated_at_line, qr/generated at: \d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d/, 'generated at ok';
 my $got      = do { local $/; <$fh> };
 my $expected = do { local $/; <DATA> };
 is $got, $expected, 'result ok';
