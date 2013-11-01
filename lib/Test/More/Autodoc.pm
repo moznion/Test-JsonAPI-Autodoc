@@ -118,7 +118,9 @@ sub _parse_json_hash {
 
     # TODO NOT GOOD (should be extracted to each method)
     if (ref $request_parameters eq 'HASH') {
-        foreach my $key (keys %$request_parameters) {
+        my @keys = keys %$request_parameters;
+        @keys = sort {$a cmp $b} @keys;
+        foreach my $key (@keys) {
             my $value = $request_parameters->{$key};
             if ($value =~ /^\d/) {
                 push @parameters, "$indent- `$key`: Number (e.g. $value)";

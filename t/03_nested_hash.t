@@ -66,12 +66,12 @@ get message
 
 __application/json__
 
+- `id`: Number (e.g. 1)
+- `message`: String (e.g. "hello")
 - `parent`: JSON
     - `child`: JSON
         - `article_id`: Number (e.g. 123)
         - `text`: String (e.g. "foobar")
-- `id`: Number (e.g. 1)
-- `message`: String (e.g. "hello")
 
 ### request
 

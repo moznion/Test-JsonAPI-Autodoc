@@ -86,6 +86,7 @@ get message
 __application/json__
 
 - `id`: Number (e.g. 1)
+- `message`: String (e.g. "hello")
 - `parent_array`: Array
     - Anonymous Array
         - Anonymous JSON
@@ -102,7 +103,6 @@ __application/json__
                 - `text`: String (e.g. "hogefuga")
         - String (e.g. "Hachioji.pm")
         - Number (e.g. 42)
-- `message`: String (e.g. "hello")
 
 ### request
 
