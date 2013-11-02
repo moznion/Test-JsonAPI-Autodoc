@@ -73,8 +73,10 @@ The example of `test.t` is as follows.
         http_ok($req, 200, "returns response");
     };
 
-The following markdown document are outputted after execution of a test
-(document output to `$project\_root/docs/test.md` on default setting).
+The following markdown document are outputted after execution of a test.
+Document will output to `$project\_root/docs/test.md` on default setting.
+($project\_root means the directory on which `cpanfile` discovered while going back to a root directory from a test script is put.
+Therefore, it is necessary to put `cpanfile` on a project root.)
 
     generated at: 2013-11-02 16:56:59
 
