@@ -75,8 +75,6 @@ The example of `test.t` is as follows.
 
 The following markdown document are outputted after execution of a test.
 Document will output to `$project\_root/docs/test.md` on default setting.
-($project\_root means the directory on which `cpanfile` discovered while going back to a root directory from a test script is put.
-Therefore, it is necessary to put `cpanfile` on a project root.)
 
     generated at: 2013-11-02 16:56:59
 
@@ -139,6 +137,15 @@ Please also refer to <a href="https://github.com/moznion/Test-JsonAPI-Autodoc/tr
 
     Set the original template. This method require the string.
     Please refer to ["CUSTOM TEMPLATE"](#CUSTOM TEMPLATE) for details.
+
+
+
+# REQUIREMENTS
+
+Generated document will output to `$project\_root/docs/` on default setting.
+$project\_root means the directory on which `cpanfile` discovered while going
+back to a root directory from a test script is put.
+Therefore, __it is necessary to put `cpanfile` on a project root__.
 
 
 

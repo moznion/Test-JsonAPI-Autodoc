@@ -2,7 +2,7 @@ Revision history for Perl extension Test-JsonAPI-Autodoc
 
 {{$NEXT}}
 
-0.03 2013-11-02T14:43:51Z
+0.04 2013-11-02T15:15:26Z
 
     - Add documents.
     - Fix some bugs.
