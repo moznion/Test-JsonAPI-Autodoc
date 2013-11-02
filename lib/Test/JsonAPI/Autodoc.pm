@@ -13,7 +13,7 @@ use Test::JsonAPI::Autodoc::Markdown;
 
 our @EXPORT = qw/describe http_ok set_documents_path set_template/;
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 my $in_describe;
 my $results;
