@@ -177,17 +177,18 @@ __END__
 
 =head1 NAME
 
-Test::JsonAPI::Autodoc - Test API response and auto generate API documents
+Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
 
 =head1 SYNOPSIS
 
-    use Test::JsonAPI::Autodoc;
-    use Test::More;
     use HTTP::Request::Common;
+    use Test::More;
+    use Test::JsonAPI::Autodoc;
 
-    describe 'POST /foobar' => sub {
-        my $req = POST '/foobar';
+    # JSON request
+    describe 'POST /foo' => sub {
+        my $req = POST '/foo';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -198,11 +199,32 @@ Test::JsonAPI::Autodoc - Test API response and auto generate API documents
         http_ok($req, 200, "returns response"); # <= Check status whether 200, and generate documents
     };
 
+    # Can also request application/x-www-form-urlencoded
+    describe 'POST /bar' => sub {
+        my $req = POST '/bar', [ id => 42, message => 'hello' ];
+        http_ok($req, 200, "returns response");
+    }
+
+
 =head1 DESCRIPTION
 
 TBD
 
 B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.>
+
+
+=head1 USAGE
+
+
+
+=head1 METHODS
+
+=head1 INSPIRED
+
+This module is inspired by “autodoc”, which is written by Ruby. That is very nice RSpec extension.
+
+See also L<https://github.com/r7kamura/autodoc>
+
 
 =head1 LICENSE
 
@@ -211,9 +233,9 @@ Copyright (C) moznion.
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
 
+
 =head1 AUTHOR
 
 moznion E<lt>moznion@gmail.comE<gt>
 
 =cut
-
