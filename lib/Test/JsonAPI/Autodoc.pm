@@ -126,7 +126,6 @@ sub _parse_json_hash {
 
     my @parameters;
 
-    # TODO NOT GOOD (should be extracted to each method)
     if (ref $request_parameters eq 'HASH') {
         my @keys = keys %$request_parameters;
         @keys = sort {$a cmp $b} @keys;

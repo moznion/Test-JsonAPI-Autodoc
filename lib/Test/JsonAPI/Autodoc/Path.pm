@@ -23,7 +23,7 @@ sub find_project_root_path {
 
         my $abs_path = $path->absolute;
         if ($paths{$abs_path}) {
-            croak '! cpanfile is not found.'; # TODO
+            croak '! cpanfile is not found. Please put cpanfile on a project root.';
         }
 
         $paths{$abs_path}++;
