@@ -104,6 +104,8 @@ The following markdown document are outputted after execution of a test
 
     ```
 
+Please also refer to <a href="https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg">examples</a>.
+
 
 
 # METHODS

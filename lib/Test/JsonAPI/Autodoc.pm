@@ -282,6 +282,12 @@ The following markdown document are outputted after execution of a test
 
 =end markdown
 
+=begin html
+
+Please also refer to <a href="https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg">examples</a>.
+
+=end html
+
 
 =head1 METHODS
 
