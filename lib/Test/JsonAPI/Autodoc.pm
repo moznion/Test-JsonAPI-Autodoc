@@ -366,6 +366,54 @@ Available variables are the followings.
 
 =head3 Example as follows.
 
+=begin kolon
+
+    : if $generated_at {
+    generated at: <: $generated_at :>
+
+    : }
+    ## <: $description :>
+
+    : for $results -> $result {
+    <: $result.note :>
+
+    ### parameters
+
+    : if $result.parameters {
+        : if $result.content_type {
+    __<: $result.content_type :>__
+
+        : }
+    : for $result.parameters -> $parameter {
+    <: $parameter :>
+    : }
+    : }
+    : else {
+    Not required
+    : }
+
+    ### request
+
+    <: $result.method:> <: $result.location :>
+    : if $result.query {
+
+        <: $result.query :>
+    : }
+
+    ### response
+
+    ```
+    Status: <: $result.status :>
+    Response:
+    <: $result.response :>
+    : }
+    ```
+
+=end kolon
+
+Template needs to be written by L<Text::Xslate::Syntax::Kolon> as looking.
+
+
 =head1 INSPIRED
 
 This module is inspired by “autodoc”, which is written by Ruby. That is very nice RSpec extension.

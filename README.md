@@ -166,6 +166,51 @@ Available variables are the followings.
 
 ### Example as follows.
 
+    : if $generated_at {
+    generated at: <: $generated_at :>
+
+    : }
+    ## <: $description :>
+
+    : for $results -> $result {
+    <: $result.note :>
+
+    ### parameters
+
+    : if $result.parameters {
+        : if $result.content_type {
+    __<: $result.content_type :>__
+
+        : }
+    : for $result.parameters -> $parameter {
+    <: $parameter :>
+    : }
+    : }
+    : else {
+    Not required
+    : }
+
+    ### request
+
+    <: $result.method:> <: $result.location :>
+    : if $result.query {
+
+        <: $result.query :>
+    : }
+
+    ### response
+
+    ```
+    Status: <: $result.status :>
+    Response:
+    <: $result.response :>
+    : }
+    ```
+
+Template needs to be written by [Text::Xslate::Syntax::Kolon](http://search.cpan.org/perldoc?Text::Xslate::Syntax::Kolon) as looking.
+
+
+
 # INSPIRED
 
 This module is inspired by “autodoc”, which is written by Ruby. That is very nice RSpec extension.
