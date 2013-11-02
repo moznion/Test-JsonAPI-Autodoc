@@ -3,7 +3,6 @@
 use strict;
 use warnings;
 use utf8;
-use FindBin;
 use HTTP::Request::Common;
 use HTTP::Response;
 use Path::Tiny;
