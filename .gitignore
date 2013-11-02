@@ -23,6 +23,6 @@ cover_db/
 
 MYMETA.*
 
-/Test-More-Autodoc-*
+/Test-JsonAPI-Autodoc-*
 
 docs/
