@@ -208,16 +208,163 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
 =head1 DESCRIPTION
 
-TBD
+Test::JsonAPI::Autodoc tests JSON API response (only check status code).
+And it generates API documents according to the response automatically.
+Please refer to L<"USAGE"> for details.
 
 B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.>
 
 
 =head1 USAGE
 
+A document will be generated if C<describe> is used instead of C<Test::More::subtest>.
+And call C<http_ok> in C<describe>, then it tests API response
+and convert the response to markdown document.
+
+Run test as follows.
+
+    $ TEST_JSONAPI_AUTODOC=1 prove t/test.t
+
+If C<TEST_JSONAPI_AUTODOC> doesn't have true value, B<documents will not generate>.
+
+The example of F<test.t> is as follows.
+
+    use HTTP::Request::Common;
+    use Test::More;
+    use Test::JsonAPI::Autodoc;
+
+    # JSON request
+    describe 'POST /foo' => sub {
+        my $req = POST '/foo';
+        $req->header('Content-Type' => 'application/json');
+        $req->content(q{
+            {
+                "id": 1,
+                "message": "blah blah"
+            }
+        });
+        http_ok($req, 200, "returns response");
+    };
+
+The following markdown document are outputted after execution of a test
+(document output to F<$project_root/doc/test.md> on default setting).
+
+=begin markdown
+
+    generated at: 2013-11-02 16:56:59
+
+    ## POST /foo
+
+    get message ok
+
+    ### parameters
+
+    __application/json__
+
+    - `id`: Number (e.g. 1)
+    - `message`: String (e.g. "blah blah")
+
+    ### request
+
+    POST /foo
+
+    ### response
+
+    ```
+    Status: 200
+    Response:
+    {
+       "message" : "success"
+    }
+
+    ```
+
+=end markdown
 
 
 =head1 METHODS
+
+=over 4
+
+=item * describe ($description, \&coderef)
+
+C<describe> method can be used like C<Test::More::subtest>.
+If this method is called, a document will be outputted with a test.
+
+C<$description> will be headline of markdown documents.
+
+B<*** DO NOT USE THIS METHOD AS NESTING ***>
+
+=item * http_ok ($request, $expected_status_code, $note);
+
+C<http_ok> method tests API response (only status code).
+and convert the response to markdown document.
+
+C<$note> will be note of markdown documents.
+
+When this method is not called in C<describe>, documents is not generated.
+
+=item * set_documents_path
+
+Set the output place of a document.
+An absolute path and a relative path can be used.
+
+=item * set_template
+
+Set the original template. This method require the string.
+Please refer to L<CUSTOM TEMPLATE> for details.
+
+=back
+
+
+=head1 CONFIGURATION AND ENVIRONMENT
+
+=over 4
+
+=item * TEST_JSONAPI_AUTODOC
+
+Documents are generated when true value is set to this environment variable.
+
+=back
+
+
+=head1 CUSTOM TEMPLATE
+
+You can customize template of markdown documents.
+
+Available variables are the followings.
+
+=over 4
+
+=item * description
+
+=item * generated_at
+
+=item * results
+
+=over 4
+
+=item * result.comment
+
+=item * result.location
+
+=item * result.method
+
+=item * result.query
+
+=item * result.content_type
+
+=item * result.parameters
+
+=item * result.status
+
+=item * result.response
+
+=back
+
+=back
+
+=head3 Example as follows.
 
 =head1 INSPIRED
 
