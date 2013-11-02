@@ -104,7 +104,7 @@ Document will output to `$project\_root/docs/test.md` on default setting.
 
     ```
 
-Please also refer to <a href="https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg">examples</a>.
+Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg)).
 
 
 
