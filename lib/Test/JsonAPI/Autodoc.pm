@@ -178,6 +178,7 @@ Test::JsonAPI::Autodoc - Test API response and auto generate API documents
 
     use Test::JsonAPI::Autodoc;
     use Test::More;
+    use HTTP::Request::Common;
 
     describe 'POST /foobar' => sub {
         my $req = POST '/foobar';
@@ -188,7 +189,7 @@ Test::JsonAPI::Autodoc - Test API response and auto generate API documents
                 "message": "blah blah"
             }
         });
-        http_ok($req, 200, "returns response");
+        http_ok($req, 200, "returns response"); # <= Check status whether 200, and generate documents
     };
 
 =head1 DESCRIPTION
