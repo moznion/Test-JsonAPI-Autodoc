@@ -371,7 +371,7 @@ Available variables are the followings.
 
 =back
 
-=head3 Example as follows.
+=head3 Example
 
 =begin kolon
 

@@ -166,7 +166,7 @@ Available variables are the followings.
     - result.status
     - result.response
 
-### Example as follows.
+### Example
 
     : if $generated_at {
     generated at: <: $generated_at :>
