@@ -45,7 +45,7 @@ __THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.__
 # USAGE
 
 A document will be generated if `describe` is used instead of `Test::More::subtest`.
-And call `http_ok` in `describe`, then it tests API response
+And call `http_ok` at inside of `describe`, then it tests API response
 and convert the response to markdown document.
 
 Run test as follows.
@@ -124,7 +124,7 @@ The following markdown document are outputted after execution of a test
 
     `$note` will be note of markdown documents.
 
-    When this method is not called in `describe`, documents is not generated.
+    When this method is not called at inside of `describe`, documents is not generated.
 
 - set\_documents\_path
 

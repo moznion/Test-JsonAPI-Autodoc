@@ -219,7 +219,7 @@ B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.>
 =head1 USAGE
 
 A document will be generated if C<describe> is used instead of C<Test::More::subtest>.
-And call C<http_ok> in C<describe>, then it tests API response
+And call C<http_ok> at inside of C<describe>, then it tests API response
 and convert the response to markdown document.
 
 Run test as follows.
@@ -303,7 +303,7 @@ and convert the response to markdown document.
 
 C<$note> will be note of markdown documents.
 
-When this method is not called in C<describe>, documents is not generated.
+When this method is not called at inside of C<describe>, documents is not generated.
 
 =item * set_documents_path
 
