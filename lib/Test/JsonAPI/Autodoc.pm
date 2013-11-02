@@ -281,11 +281,7 @@ Document will output to F<$project_root/docs/test.md> on default setting.
 
 =end text
 
-=begin html
-
-Please also refer to <a href="https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg">examples</a>.
-
-=end html
+Please also refer to example (L<https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg>).
 
 
 =head1 METHODS
