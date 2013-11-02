@@ -249,7 +249,7 @@ The example of F<test.t> is as follows.
 The following markdown document are outputted after execution of a test.
 Document will output to F<$project_root/docs/test.md> on default setting.
 
-=begin markdown
+=begin text
 
     generated at: 2013-11-02 16:56:59
 
@@ -279,7 +279,7 @@ Document will output to F<$project_root/docs/test.md> on default setting.
 
     ```
 
-=end markdown
+=end text
 
 =begin html
 
@@ -380,7 +380,7 @@ Available variables are the followings.
 
 =head3 Example
 
-=begin kolon
+=begin text
 
     : if $generated_at {
     generated at: <: $generated_at :>
@@ -423,7 +423,7 @@ Available variables are the followings.
     : }
     ```
 
-=end kolon
+=end text
 
 Template needs to be written by L<Text::Xslate::Syntax::Kolon> as looking.
 
