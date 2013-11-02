@@ -24,7 +24,7 @@ subtest 'default' => sub {
     my $got = Test::JsonAPI::Autodoc::Path->document_path();
 
     (my $filename = path($0)->basename) =~ s/\.t$//;
-    my $expected = path($FindBin::Bin)->parent->child("doc/$filename.md");
+    my $expected = path($FindBin::Bin)->parent->child("docs/$filename.md");
 
     is $got->realpath, $expected->realpath, 'can use default path';
 

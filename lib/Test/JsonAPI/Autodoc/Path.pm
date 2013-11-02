@@ -53,7 +53,7 @@ sub document_path {
     else {
         # Default
         my $project_root_path = __PACKAGE__->find_project_root_path;
-        $document_path = $project_root_path->child("doc/$markdown_file");
+        $document_path = $project_root_path->child("docs/$markdown_file");
     }
 
     $document_path->touchpath;

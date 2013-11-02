@@ -74,7 +74,7 @@ The example of `test.t` is as follows.
     };
 
 The following markdown document are outputted after execution of a test
-(document output to `$project\_root/doc/test.md` on default setting).
+(document output to `$project\_root/docs/test.md` on default setting).
 
     generated at: 2013-11-02 16:56:59
 

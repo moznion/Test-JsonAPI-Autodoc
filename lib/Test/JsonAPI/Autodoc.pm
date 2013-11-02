@@ -248,7 +248,7 @@ The example of F<test.t> is as follows.
     };
 
 The following markdown document are outputted after execution of a test
-(document output to F<$project_root/doc/test.md> on default setting).
+(document output to F<$project_root/docs/test.md> on default setting).
 
 =begin markdown
 
