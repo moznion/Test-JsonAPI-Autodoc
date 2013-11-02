@@ -58,8 +58,10 @@ sub http_ok {
     my $request_body = $req->content;
     my $content_type = $req->content_type;
 
+    my $is_json = 0;
     if($content_type =~ m!^application/json!) {
         $request_body = to_json(from_json($req->decoded_content), { pretty => 1 });
+        $is_json = 1;
     }
 
     my $res = LWP::UserAgent->new->request($req);
@@ -79,7 +81,7 @@ sub http_ok {
         method       => $req->method,
         query        => $req->uri->query,
         content_type => $content_type,
-        parameters   => _parse_request_parameters($request_body, $content_type),
+        parameters   => _parse_request_parameters($request_body, $is_json),
 
         status       => $expected_code,
         response     => $response_body,
@@ -91,10 +93,10 @@ sub set_documents_path {
 }
 
 sub _parse_request_parameters {
-    my ($request_parameters, $content_type) = @_;
+    my ($request_parameters, $is_json) = @_;
 
     my $parameters;
-    if($content_type =~ m!^application/json!) { # TODO
+    if($is_json) {
         $request_parameters = JSON::decode_json($request_parameters);
         $parameters = _parse_json_hash($request_parameters);
     }
