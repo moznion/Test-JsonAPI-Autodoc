@@ -221,6 +221,12 @@ See also [https://github.com/r7kamura/autodoc](https://github.com/r7kamura/autod
 
 
 
+# NOTE
+
+This module is developing. I think that there is much bug in this module. I am waiting for your report!
+
+
+
 # LICENSE
 
 Copyright (C) moznion.

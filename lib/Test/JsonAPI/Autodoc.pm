@@ -428,6 +428,11 @@ This module is inspired by “autodoc”, which is written by Ruby. That is very
 See also L<https://github.com/r7kamura/autodoc>
 
 
+=head1 NOTE
+
+This module is developing. I think that there is much bug in this module. I am waiting for your report!
+
+
 =head1 LICENSE
 
 Copyright (C) moznion.
