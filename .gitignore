@@ -26,3 +26,4 @@ MYMETA.*
 /Test-JsonAPI-Autodoc-*
 
 docs/
+!eg/docs/
