@@ -43,7 +43,7 @@ sub describe {
 
     my $result = Test::More::subtest($description => $coderef);
 
-    if ($result && $ENV{TEST_MORE_AUTODOC}) {
+    if ($result && $ENV{TEST_JSONAPI_AUTODOC}) {
         Test::JsonAPI::Autodoc::Markdown->new($output_path)->generate($description, $results, $first_time);
     }
 }
