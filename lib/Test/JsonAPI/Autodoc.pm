@@ -11,14 +11,16 @@ use LWP::UserAgent;
 use URL::Encode qw/url_params_flat/;
 use Test::JsonAPI::Autodoc::Markdown;
 
-our @EXPORT = qw/describe http_ok set_documents_path/;
+our @EXPORT = qw/describe http_ok set_documents_path set_template/;
 
 our $VERSION = "0.01";
 
 my $in_describe;
 my $results;
 my $first_time;
+
 my $output_path;
+my $template;
 
 BEGIN {
     $first_time = 1;
@@ -44,7 +46,7 @@ sub describe {
     my $result = Test::More::subtest($description => $coderef);
 
     if ($result && $ENV{TEST_JSONAPI_AUTODOC}) {
-        Test::JsonAPI::Autodoc::Markdown->new($output_path)->generate($description, $results, $first_time);
+        Test::JsonAPI::Autodoc::Markdown->new($output_path, $template)->generate($description, $results, $first_time);
     }
 }
 
@@ -90,6 +92,10 @@ sub http_ok {
 
 sub set_documents_path {
     $output_path = shift;
+}
+
+sub set_template {
+    $template = shift;
 }
 
 sub _parse_request_parameters {
