@@ -70,6 +70,7 @@ sub http_ok {
 
     my $result = Test::More::is $res->code, $expected_code;
     return unless $result;
+    return unless $in_describe;
 
     my $response_body = $res->content;
     if($res->content_type =~ m!^application/json!) {
