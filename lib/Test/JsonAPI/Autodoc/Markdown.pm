@@ -65,13 +65,10 @@ generated at: <: $generated_at :>
 ### parameters
 
 : if $result.parameters {
-    : if $result.content_type.match(rx('^application/json')) {
-__application/json__
-    : }
-    : else {
-__application/x-www-form-urlencoded__
-    : }
+    : if $result.content_type {
+__<: $result.content_type :>__
 
+    : }
 : for $result.parameters -> $parameter {
 <: $parameter :>
 : }
