@@ -51,7 +51,7 @@ sub describe {
 }
 
 sub http_ok {
-    my ($req, $expected_code, $comment) = @_;
+    my ($req, $expected_code, $note) = @_;
 
     unless ($req->isa('HTTP::Request')) {
         croak 'Request must be instance of HTTP::Request or subclass of that';
@@ -77,7 +77,7 @@ sub http_ok {
     }
 
     push @$results, +{
-        comment      => $comment,
+        note         => $note,
 
         location     => $req->uri->path,
         method       => $req->method,
@@ -344,7 +344,7 @@ Available variables are the followings.
 
 =over 4
 
-=item * result.comment
+=item * result.note
 
 =item * result.location
 

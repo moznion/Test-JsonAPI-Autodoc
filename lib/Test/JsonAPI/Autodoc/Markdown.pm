@@ -60,7 +60,7 @@ generated at: <: $generated_at :>
 ## <: $description :>
 
 : for $results -> $result {
-<: $result.comment :>
+<: $result.note :>
 
 ### parameters
 
