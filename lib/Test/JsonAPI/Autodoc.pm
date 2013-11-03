@@ -208,7 +208,7 @@ __END__
 
 =encoding utf-8
 
-=for stopwords autodoc
+=for stopwords autodoc coderef
 
 =head1 NAME
 
