@@ -110,13 +110,13 @@ The example of `test.t` is as follows.
                 "message": "blah blah"
             }
         });
-        http_ok($req, 200, "returns response");
+        http_ok($req, 200, "get message ok");
     };
 
 The following markdown document are outputted after execution of a test.
 Document will output to `$project\_root/docs/test.md` on default setting.
 
-    generated at: 2013-11-02 16:56:59
+    generated at: 2013-11-03 22:29:06
 
     ## POST /foo
 
