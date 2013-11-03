@@ -66,6 +66,10 @@ generated at: <: $generated_at :>
 ### Target Server
 
 <: $result.server :>
+: if $result.is_plack_app {
+
+(Plack application)
+: }
 
 :}
 ### parameters

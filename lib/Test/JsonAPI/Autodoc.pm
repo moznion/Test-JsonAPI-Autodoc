@@ -83,6 +83,7 @@ sub _api_ok {
     }
 
     my $res;
+    my $is_plack_app = 0;
     if ($plack_app) { # for Plack::Test
         if (ref $plack_app eq 'CODE') { # use `test_psgi`
             $res = $plack_app->($req);
@@ -90,6 +91,7 @@ sub _api_ok {
         else { # not use `test_psgi`
             $res = $plack_app->request($req);
         }
+        $is_plack_app = 1;
     }
     else {
         $res = LWP::UserAgent->new->request($req);
@@ -118,6 +120,7 @@ sub _api_ok {
         query         => $req->uri->query,
         content_type  => $content_type,
         parameters    => _parse_request_parameters($request_body, $is_json),
+        is_plack_app  => $is_plack_app,
 
         status        => $expected_code,
         response      => $response_body,

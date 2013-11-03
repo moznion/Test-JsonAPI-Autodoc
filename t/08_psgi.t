@@ -94,6 +94,8 @@ get message ok
 
 http://localhost
 
+(Plack application)
+
 ### parameters
 
 __application/json__
@@ -124,6 +126,8 @@ get message ok
 
 http://localhost
 
+(Plack application)
+
 ### parameters
 
 __application/json__
@@ -153,6 +157,8 @@ not found
 ### Target Server
 
 http://localhost
+
+(Plack application)
 
 ### parameters
 
