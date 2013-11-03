@@ -11,7 +11,13 @@ use LWP::UserAgent;
 use URL::Encode qw/url_params_flat/;
 use Test::JsonAPI::Autodoc::Markdown;
 
-our @EXPORT = qw/describe http_ok set_documents_path set_template/;
+our @EXPORT = qw/
+    describe
+    http_ok
+    plack_ok
+    set_documents_path
+    set_template
+/;
 
 our $VERSION = "0.06";
 
@@ -51,7 +57,17 @@ sub describe {
 }
 
 sub http_ok {
-    my ($req, $expected_code, $note, $callback) = @_;
+    my ($req, $expected_code, $note) = @_;
+    _api_ok($req, $expected_code, $note);
+}
+
+sub plack_ok {
+    my ($plack_app, $req, $expected_code, $note) = @_;
+    _api_ok($req, $expected_code, $note, $plack_app);
+}
+
+sub _api_ok {
+    my ($req, $expected_code, $note, $plack_app) = @_;
 
     unless ($req->isa('HTTP::Request')) {
         croak 'Request must be instance of HTTP::Request or subclass of that';
@@ -67,12 +83,12 @@ sub http_ok {
     }
 
     my $res;
-    if ($callback) { # for Plack::Test
-        if (ref $callback eq 'CODE') { # use `test_psgi`
-            $res = $callback->($req);
+    if ($plack_app) { # for Plack::Test
+        if (ref $plack_app eq 'CODE') { # use `test_psgi`
+            $res = $plack_app->($req);
         }
         else { # not use `test_psgi`
-            $res = $callback->request($req);
+            $res = $plack_app->request($req);
         }
     }
     else {

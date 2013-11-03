@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use utf8;
 use HTTP::Request::Common;
-use HTTP::Response;
 use Path::Tiny;
 use Test::Mock::LWP::Conditional;
 use Plack::Test;
@@ -40,7 +39,7 @@ subtest 'Not use test_psgi' => sub {
             "message": "blah blah"
             }
         });
-        http_ok($req, 200, "get message ok", $test_app);
+        plack_ok($test_app, $req, 200, "get message ok", );
     };
 };
 
@@ -57,7 +56,7 @@ subtest 'Use test_psgi' => sub {
                     "message": "blah blah"
                 }
             });
-            http_ok($req, 200, "get message ok", $cb);
+            plack_ok($cb, $req, 200, "get message ok");
         };
 
         describe 'POST /not-exist' => sub {
@@ -69,7 +68,7 @@ subtest 'Use test_psgi' => sub {
                     "message": "blah blah"
                 }
             });
-            http_ok($req, 404, "not found", $cb);
+            plack_ok($cb, $req, 404, "not found");
         };
     };
 };
