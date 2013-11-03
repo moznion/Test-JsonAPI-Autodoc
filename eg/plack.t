@@ -4,7 +4,6 @@ use strict;
 use warnings;
 use utf8;
 use HTTP::Request::Common;
-use Path::Tiny;
 use Plack::Request;
 
 use Plack::Test;
