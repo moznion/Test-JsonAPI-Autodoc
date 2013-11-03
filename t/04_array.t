@@ -80,7 +80,7 @@ __DATA__
 
 get message
 
-### parameters
+### Parameters
 
 __application/json__
 
@@ -103,11 +103,11 @@ __application/json__
         - String (e.g. "Hachioji.pm")
         - Number (e.g. 42)
 
-### request
+### Request
 
 POST /foobar
 
-### response
+### Response
 
 ```
 Status: 200

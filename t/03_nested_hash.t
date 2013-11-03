@@ -61,7 +61,7 @@ __DATA__
 
 get message
 
-### parameters
+### Parameters
 
 __application/json__
 
@@ -72,11 +72,11 @@ __application/json__
         - `article_id`: Number (e.g. 123)
         - `text`: String (e.g. "foobar")
 
-### request
+### Request
 
 POST /foobar
 
-### response
+### Response
 
 ```
 Status: 200

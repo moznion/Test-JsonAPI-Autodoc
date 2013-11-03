@@ -79,18 +79,18 @@ get message ok
 
 http://localhost:3000
 
-### parameters
+### Parameters
 
 __application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
-### request
+### Request
 
 POST /foobar
 
-### response
+### Response
 
 ```
 Status: 200
@@ -105,18 +105,18 @@ Response:
 
 get 400 ok
 
-### parameters
+### Parameters
 
 __application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
-### request
+### Request
 
 POST /bad
 
-### response
+### Response
 
 ```
 Status: 400

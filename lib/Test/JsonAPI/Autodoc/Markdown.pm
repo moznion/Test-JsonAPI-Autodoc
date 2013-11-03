@@ -72,7 +72,7 @@ generated at: <: $generated_at :>
 : }
 
 :}
-### parameters
+### Parameters
 
 : if $result.parameters {
     : if $result.content_type {
@@ -87,7 +87,7 @@ __<: $result.content_type :>__
 Not required
 : }
 
-### request
+### Request
 
 <: $result.method:> <: $result.path :>
 : if $result.query {
@@ -95,7 +95,7 @@ Not required
     <: $result.query :>
 : }
 
-### response
+### Response
 
 ```
 Status: <: $result.status :>

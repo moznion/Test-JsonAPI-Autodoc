@@ -211,6 +211,8 @@ __END__
 
 =encoding utf-8
 
+=for stopwords autodoc
+
 =head1 NAME
 
 Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
@@ -336,18 +338,18 @@ Document will output to F<$project_root/docs/test.md> on default setting.
 
     http://localhost:5000
 
-    ### parameters
+    ### Parameters
 
     __application/json__
 
     - `id`: Number (e.g. 1)
     - `message`: String (e.g. "blah blah")
 
-    ### request
+    ### Request
 
     POST /foo
 
-    ### response
+    ### Response
 
     ```
     Status: 200
@@ -480,7 +482,7 @@ Available variables are the followings.
     : }
 
     :}
-    ### parameters
+    ### Parameters
 
     : if $result.parameters {
         : if $result.content_type {
@@ -495,7 +497,7 @@ Available variables are the followings.
     Not required
     : }
 
-    ### request
+    ### Request
 
     <: $result.method:> <: $result.path :>
     : if $result.query {
@@ -503,7 +505,7 @@ Available variables are the followings.
         <: $result.query :>
     : }
 
-    ### response
+    ### Response
 
     ```
     Status: <: $result.status :>

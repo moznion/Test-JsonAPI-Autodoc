@@ -96,18 +96,18 @@ http://localhost
 
 (Plack application)
 
-### parameters
+### Parameters
 
 __application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
-### request
+### Request
 
 POST /
 
-### response
+### Response
 
 ```
 Status: 200
@@ -128,18 +128,18 @@ http://localhost
 
 (Plack application)
 
-### parameters
+### Parameters
 
 __application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
-### request
+### Request
 
 POST /
 
-### response
+### Response
 
 ```
 Status: 200
@@ -160,18 +160,18 @@ http://localhost
 
 (Plack application)
 
-### parameters
+### Parameters
 
 __application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
-### request
+### Request
 
 POST /not-exist
 
-### response
+### Response
 
 ```
 Status: 404

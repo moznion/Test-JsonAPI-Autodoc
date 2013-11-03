@@ -50,18 +50,18 @@ __DATA__
 
 get 200 ok
 
-### parameters
+### Parameters
 
 __application/x-www-form-urlencoded__
 
 - `id`
 - `message`
 
-### request
+### Request
 
 POST /foobar
 
-### response
+### Response
 
 ```
 Status: 200
