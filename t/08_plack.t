@@ -39,7 +39,7 @@ subtest 'Not use test_psgi' => sub {
             "message": "blah blah"
             }
         });
-        plack_ok($test_app, $req, 200, "get message ok", );
+        plack_ok($test_app, $req, 200, "get message ok");
     };
 };
 
