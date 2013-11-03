@@ -51,7 +51,7 @@ sub describe {
 }
 
 sub http_ok {
-    my ($req, $expected_code, $note) = @_;
+    my ($req, $expected_code, $note, $callback) = @_;
 
     unless ($req->isa('HTTP::Request')) {
         croak 'Request must be instance of HTTP::Request or subclass of that';
@@ -66,7 +66,18 @@ sub http_ok {
         $is_json = 1;
     }
 
-    my $res = LWP::UserAgent->new->request($req);
+    my $res;
+    if ($callback) { # for Plack::Test
+        if (ref $callback eq 'CODE') { # use `test_psgi`
+            $res = $callback->($req);
+        }
+        else { # not use `test_psgi`
+            $res = $callback->request($req);
+        }
+    }
+    else {
+        $res = LWP::UserAgent->new->request($req);
+    }
 
     my $result = Test::More::is $res->code, $expected_code;
     return unless $result;
