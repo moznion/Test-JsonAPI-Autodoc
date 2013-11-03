@@ -394,7 +394,9 @@ Available variables are the followings.
 
 =item * result.note
 
-=item * result.location
+=item * result.path
+
+=item * result.server
 
 =item * result.method
 
@@ -423,6 +425,16 @@ Available variables are the followings.
     : for $results -> $result {
     <: $result.note :>
 
+    : if $result.server {
+    ### Target Server
+
+    <: $result.server :>
+    : if $result.is_plack_app {
+
+    (Plack application)
+    : }
+
+    :}
     ### parameters
 
     : if $result.parameters {
@@ -440,7 +452,7 @@ Available variables are the followings.
 
     ### request
 
-    <: $result.method:> <: $result.location :>
+    <: $result.method:> <: $result.path :>
     : if $result.query {
 
         <: $result.query :>
