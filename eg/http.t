@@ -14,17 +14,17 @@ BEGIN {
     $ENV{TEST_JSONAPI_AUTODOC} = 1;
 }
 
+# Stabbing a server
 my $ok_res = HTTP::Response->new(200);
 $ok_res->content('{ "message" : "success" }');
 $ok_res->content_type('application/json');
-
 Test::Mock::LWP::Conditional->stub_request(
-    "/foobar" => $ok_res,
+    "http://localhost:5000/foo" => $ok_res,
 );
 
 subtest '200 OK' => sub {
-    describe 'POST /foobar' => sub {
-        my $req = POST '/foobar';
+    describe 'POST /foo' => sub {
+        my $req = POST 'http://localhost:5000/foo';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -34,7 +34,6 @@ subtest '200 OK' => sub {
         });
         http_ok($req, 200, "get message ok");
     };
-
 };
 
 done_testing;

@@ -5,7 +5,6 @@ use warnings;
 use utf8;
 use HTTP::Request::Common;
 use Path::Tiny;
-use Test::Mock::LWP::Conditional;
 use Plack::Test;
 use Plack::Request;
 

@@ -1,21 +1,25 @@
-generated at: 2013-11-02 18:44:48
+generated at: 2013-11-03 22:29:06
 
-## POST /foobar
+## POST /foo
 
 get message ok
 
-### parameters
+### Target Server
+
+http://localhost:5000
+
+### Parameters
 
 __application/json__
 
 - `id`: Number (e.g. 1)
 - `message`: String (e.g. "blah blah")
 
-### request
+### Request
 
-POST /foobar
+POST /foo
 
-### response
+### Response
 
 ```
 Status: 200
