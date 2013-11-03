@@ -13,7 +13,7 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
     # JSON request
     describe 'POST /foo' => sub {
-        my $req = POST '/foo';
+        my $req = POST 'http://localhost:5000/foo';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -26,11 +26,51 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
     # Can also request application/x-www-form-urlencoded
     describe 'POST /bar' => sub {
-        my $req = POST '/bar', [ id => 42, message => 'hello' ];
+        my $req = POST 'http://localhost:3000/bar', [ id => 42, message => 'hello' ];
         http_ok($req, 200, "returns response");
     }
 
+    # And you can use Plack::Test
+    use Plack::Test;
+    use Plack::Request;
+    my $app = sub {
+        my $env = shift;
+        my $req = Plack::Request->new($env);
+        if ($req->path eq '/') {
+            return [ 200, [ 'Content-Type' => 'application/json' ], ['{ "message" : "success" }'] ];
+        }
+        return [ 404, [ 'Content-Type' => 'text/plain' ], [ "Not found" ] ];
+    };
 
+    my $test_app = Plack::Test->create($app);
+    describe 'POST /' => sub {
+        my $req = POST '/';
+        $req->header('Content-Type' => 'application/json');
+        $req->content(q{
+            {
+            "id": 1,
+            "message": "blah blah"
+            }
+        });
+        plack_ok($test_app, $req, 200, "get message ok");
+    };
+
+    # Of course you can use `test_psgi`
+    test_psgi $app, sub {
+        my $cb = shift;
+
+        describe 'POST /not-exist' => sub {
+            my $req = POST '/not-exist';
+            $req->header('Content-Type' => 'application/json');
+            $req->content(q{
+                {
+                    "id": 1,
+                    "message": "blah blah"
+                }
+            });
+            plack_ok($cb, $req, 404, "not found");
+        };
+    };
 
 # DESCRIPTION
 
@@ -45,7 +85,7 @@ __THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.__
 # USAGE
 
 A document will be generated if `describe` is used instead of `Test::More::subtest`.
-And call `http_ok` at inside of `describe`, then it tests API response
+And call `http_ok` or `plack_ok` at inside of `describe`, then it tests API response
 and convert the response to markdown document.
 
 Run test as follows.
@@ -62,7 +102,7 @@ The example of `test.t` is as follows.
 
     # JSON request
     describe 'POST /foo' => sub {
-        my $req = POST '/foo';
+        my $req = POST 'http://localhost:5000/foo';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -82,18 +122,22 @@ Document will output to `$project\_root/docs/test.md` on default setting.
 
     get message ok
 
-    ### parameters
+    ### Target Server
+
+    http://localhost:5000
+
+    ### Parameters
 
     __application/json__
 
     - `id`: Number (e.g. 1)
     - `message`: String (e.g. "blah blah")
 
-    ### request
+    ### Request
 
     POST /foo
 
-    ### response
+    ### Response
 
     ```
     Status: 200
@@ -119,7 +163,7 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
 
     __\*\*\* DO NOT USE THIS METHOD AS NESTING \*\*\*__
 
-- http\_ok ($request, $expected\_status\_code, $note);
+- http\_ok ($request, $expected\_status\_code, $note)
 
     `http_ok` method tests API response (only status code).
     and convert the response to markdown document.
@@ -127,6 +171,12 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
     `$note` will be note of markdown documents.
 
     When this method is not called at inside of `describe`, documents is not generated.
+
+- plack\_ok ($plack\_app, $request, $expected\_status\_code, $note)
+
+    `plack_ok` method carries out almost the same operation as `http_ok`.
+    This method is for [Plack](http://search.cpan.org/perldoc?Plack) application.
+    This method requires plack application as the first argument.
 
 - set\_documents\_path
 
@@ -167,7 +217,8 @@ Available variables are the followings.
 - generated\_at
 - results
     - result.note
-    - result.location
+    - result.path
+    - result.server
     - result.method
     - result.query
     - result.content\_type
@@ -186,7 +237,17 @@ Available variables are the followings.
     : for $results -> $result {
     <: $result.note :>
 
-    ### parameters
+    : if $result.server {
+    ### Target Server
+
+    <: $result.server :>
+    : if $result.is_plack_app {
+
+    (Plack application)
+    : }
+
+    :}
+    ### Parameters
 
     : if $result.parameters {
         : if $result.content_type {
@@ -201,15 +262,15 @@ Available variables are the followings.
     Not required
     : }
 
-    ### request
+    ### Request
 
-    <: $result.method:> <: $result.location :>
+    <: $result.method:> <: $result.path :>
     : if $result.query {
 
         <: $result.query :>
     : }
 
-    ### response
+    ### Response
 
     ```
     Status: <: $result.status :>

@@ -224,7 +224,7 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
     # JSON request
     describe 'POST /foo' => sub {
-        my $req = POST '/foo';
+        my $req = POST 'http://localhost:5000/foo';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -237,10 +237,51 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
     # Can also request application/x-www-form-urlencoded
     describe 'POST /bar' => sub {
-        my $req = POST '/bar', [ id => 42, message => 'hello' ];
+        my $req = POST 'http://localhost:3000/bar', [ id => 42, message => 'hello' ];
         http_ok($req, 200, "returns response");
     }
 
+    # And you can use Plack::Test
+    use Plack::Test;
+    use Plack::Request;
+    my $app = sub {
+        my $env = shift;
+        my $req = Plack::Request->new($env);
+        if ($req->path eq '/') {
+            return [ 200, [ 'Content-Type' => 'application/json' ], ['{ "message" : "success" }'] ];
+        }
+        return [ 404, [ 'Content-Type' => 'text/plain' ], [ "Not found" ] ];
+    };
+
+    my $test_app = Plack::Test->create($app);
+    describe 'POST /' => sub {
+        my $req = POST '/';
+        $req->header('Content-Type' => 'application/json');
+        $req->content(q{
+            {
+            "id": 1,
+            "message": "blah blah"
+            }
+        });
+        plack_ok($test_app, $req, 200, "get message ok");
+    };
+
+    # Of course you can use `test_psgi`
+    test_psgi $app, sub {
+        my $cb = shift;
+
+        describe 'POST /not-exist' => sub {
+            my $req = POST '/not-exist';
+            $req->header('Content-Type' => 'application/json');
+            $req->content(q{
+                {
+                    "id": 1,
+                    "message": "blah blah"
+                }
+            });
+            plack_ok($cb, $req, 404, "not found");
+        };
+    };
 
 =head1 DESCRIPTION
 
@@ -271,7 +312,7 @@ The example of F<test.t> is as follows.
 
     # JSON request
     describe 'POST /foo' => sub {
-        my $req = POST '/foo';
+        my $req = POST 'http://localhost:5000/foo';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -290,6 +331,10 @@ Document will output to F<$project_root/docs/test.md> on default setting.
     ## POST /foo
 
     get message ok
+
+    ### Target Server
+
+    http://localhost:5000
 
     ### parameters
 
