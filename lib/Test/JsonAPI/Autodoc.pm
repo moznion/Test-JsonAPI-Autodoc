@@ -32,6 +32,14 @@ BEGIN {
     $first_time = 1;
 }
 
+sub set_documents_path {
+    $output_path = shift;
+}
+
+sub set_template {
+    $template = shift;
+}
+
 sub describe {
     if ($in_describe) {
         croak '`describe` must not call as nesting';
@@ -85,12 +93,8 @@ sub _api_ok {
     my $res;
     my $is_plack_app = 0;
     if ($plack_app) { # for Plack::Test
-        if (ref $plack_app eq 'CODE') { # use `test_psgi`
-            $res = $plack_app->($req);
-        }
-        else { # not use `test_psgi`
-            $res = $plack_app->request($req);
-        }
+        $res = ref $plack_app eq 'CODE' ? $plack_app->($req)         # use `test_psgi`
+                                        : $plack_app->request($req); # not use `test_psgi`
         $is_plack_app = 1;
     }
     else {
@@ -98,6 +102,7 @@ sub _api_ok {
     }
 
     my $result = Test::More::is $res->code, $expected_code;
+
     return unless $result;
     return unless $in_describe;
 
@@ -125,14 +130,6 @@ sub _api_ok {
         status        => $expected_code,
         response      => $response_body,
     };
-}
-
-sub set_documents_path {
-    $output_path = shift;
-}
-
-sub set_template {
-    $template = shift;
 }
 
 sub _parse_request_parameters {
