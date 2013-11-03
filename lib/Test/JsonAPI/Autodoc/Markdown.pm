@@ -79,7 +79,7 @@ Not required
 
 ### request
 
-<: $result.method:> <: $result.location :>
+<: $result.method:> <: $result.path :>
 : if $result.query {
 
     <: $result.query :>

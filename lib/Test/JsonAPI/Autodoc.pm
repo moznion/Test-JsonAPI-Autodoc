@@ -104,17 +104,23 @@ sub _api_ok {
         $response_body = to_json(from_json($res->decoded_content), { pretty => 1 });
     }
 
+    my $target_server = '';
+    if ($req->uri->scheme && $req->uri->authority) {
+        $target_server = $req->uri->scheme . '://' . $req->uri->authority;
+    }
+
     push @$results, +{
-        note         => $note,
+        note          => $note,
 
-        location     => $req->uri->path,
-        method       => $req->method,
-        query        => $req->uri->query,
-        content_type => $content_type,
-        parameters   => _parse_request_parameters($request_body, $is_json),
+        path          => $req->uri->path,
+        server        => $target_server,
+        method        => $req->method,
+        query         => $req->uri->query,
+        content_type  => $content_type,
+        parameters    => _parse_request_parameters($request_body, $is_json),
 
-        status       => $expected_code,
-        response     => $response_body,
+        status        => $expected_code,
+        response      => $response_body,
     };
 }
 
