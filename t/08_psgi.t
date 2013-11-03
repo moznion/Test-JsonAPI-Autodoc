@@ -90,6 +90,10 @@ __DATA__
 
 get message ok
 
+### Target Server
+
+http://localhost
+
 ### parameters
 
 __application/json__
@@ -116,6 +120,10 @@ Response:
 
 get message ok
 
+### Target Server
+
+http://localhost
+
 ### parameters
 
 __application/json__
@@ -141,6 +149,10 @@ Response:
 ## POST /not-exist
 
 not found
+
+### Target Server
+
+http://localhost
 
 ### parameters
 

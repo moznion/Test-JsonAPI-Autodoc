@@ -62,6 +62,12 @@ generated at: <: $generated_at :>
 : for $results -> $result {
 <: $result.note :>
 
+: if $result.server {
+### Target Server
+
+<: $result.server :>
+
+:}
 ### parameters
 
 : if $result.parameters {

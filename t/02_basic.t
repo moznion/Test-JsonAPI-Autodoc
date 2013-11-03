@@ -25,13 +25,13 @@ $ok_res->content_type('application/json');
 my $bad_res = HTTP::Response->new(400);
 
 Test::Mock::LWP::Conditional->stub_request(
-    "/foobar" => $ok_res,
+    "http://localhost:3000/foobar" => $ok_res,
     "/bad"    => $bad_res,
 );
 
 subtest '200 OK' => sub {
     describe 'POST /foobar' => sub {
-        my $req = POST '/foobar';
+        my $req = POST 'http://localhost:3000/foobar';
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
@@ -74,6 +74,10 @@ __DATA__
 ## POST /foobar
 
 get message ok
+
+### Target Server
+
+http://localhost:3000
 
 ### parameters
 
