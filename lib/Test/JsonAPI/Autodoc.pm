@@ -254,7 +254,7 @@ B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.>
 =head1 USAGE
 
 A document will be generated if C<describe> is used instead of C<Test::More::subtest>.
-And call C<http_ok> at inside of C<describe>, then it tests API response
+And call C<http_ok> or C<plack_ok> at inside of C<describe>, then it tests API response
 and convert the response to markdown document.
 
 Run test as follows.
@@ -329,7 +329,7 @@ C<$description> will be headline of markdown documents.
 
 B<*** DO NOT USE THIS METHOD AS NESTING ***>
 
-=item * http_ok ($request, $expected_status_code, $note);
+=item * http_ok ($request, $expected_status_code, $note)
 
 C<http_ok> method tests API response (only status code).
 and convert the response to markdown document.
@@ -337,6 +337,12 @@ and convert the response to markdown document.
 C<$note> will be note of markdown documents.
 
 When this method is not called at inside of C<describe>, documents is not generated.
+
+=item * plack_ok ($plack_app, $request, $expected_status_code, $note)
+
+C<plack_ok> method carries out almost the same operation as C<http_ok>.
+This method is for L<Plack> application.
+This method requires plack application as the first argument.
 
 =item * set_documents_path
 
