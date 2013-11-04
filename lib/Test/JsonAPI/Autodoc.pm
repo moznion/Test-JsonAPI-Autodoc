@@ -6,10 +6,10 @@ use parent qw/Exporter/;
 use Carp;
 use Test::More ();
 use Scope::Guard;
-use JSON;
 use LWP::UserAgent;
 use Test::JsonAPI::Autodoc::Markdown;
 use Test::JsonAPI::Autodoc::Request;
+use Test::JsonAPI::Autodoc::Response;
 
 our @EXPORT = qw/
     describe
@@ -89,18 +89,13 @@ sub _api_ok {
     }
 
     my $result = Test::More::is $res->code, $expected_code;
-
     return unless $result;
     return unless $in_describe;
 
-    my $parsed_request = Test::JsonAPI::Autodoc::Request->new->parse($req);
+    my $parsed_request  = Test::JsonAPI::Autodoc::Request->new->parse($req);
+    my $parsed_response = Test::JsonAPI::Autodoc::Response->new->parse($res);
 
-    my $response_body = $res->content;
-    if($res->content_type =~ m!^application/json!) {
-        $response_body = to_json(from_json($res->decoded_content), { pretty => 1 });
-    }
-
-    push @$results, +{
+    push @$results, {
         note          => $note,
 
         path          => $parsed_request->{path},
@@ -112,7 +107,7 @@ sub _api_ok {
         is_plack_app  => $is_plack_app,
 
         status        => $expected_code,
-        response      => $response_body,
+        response      => $parsed_response->{body},
     };
 }
 1;
