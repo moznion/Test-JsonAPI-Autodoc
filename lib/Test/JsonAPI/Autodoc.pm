@@ -428,6 +428,16 @@ Available variables are the followings.
 Template needs to be written by L<Text::Xslate::Syntax::Kolon> as looking.
 
 
+=head1 FAQ
+
+=head4 Does this module correspond to JSON-RPC?
+
+Yes. It can use as L<https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json_rpc.t>.
+
+=head4 Can methods of L<Test::More> (e.g. C<subtest()>) be called in C<describe()>?
+
+Yes, of course!!
+
 =head1 INSPIRED
 
 This module is inspired by “autodoc”, which is written by Ruby. That is very nice RSpec extension.
