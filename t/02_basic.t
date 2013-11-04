@@ -93,7 +93,8 @@ POST /foobar
 ### Response
 
 ```
-Status: 200
+Status:       200
+Content-Type: application/json
 Response:
 {
    "message" : "success"
@@ -119,7 +120,8 @@ POST /bad
 ### Response
 
 ```
-Status: 400
+Status:       400
+Content-Type: text/plain
 Response:
 400 URL must be absolute
 

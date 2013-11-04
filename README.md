@@ -221,10 +221,12 @@ Available variables are the followings.
     - result.server
     - result.method
     - result.query
-    - result.content\_type
-    - result.parameters
+    - result.request\_content\_type
+    - result.request\_parameters
+    - result.is\_plack\_app
     - result.status
-    - result.response
+    - result.response\_body
+    - result.response\_content\_type
 
 ### Example
 
@@ -249,12 +251,12 @@ Available variables are the followings.
     :}
     ### Parameters
 
-    : if $result.parameters {
-        : if $result.content_type {
-    __<: $result.content_type :>__
+    : if $result.request_parameters {
+        : if $result.request_content_type {
+    __<: $result.request_content_type :>__
 
         : }
-    : for $result.parameters -> $parameter {
+    : for $result.request_parameters -> $parameter {
     <: $parameter :>
     : }
     : }
@@ -273,9 +275,10 @@ Available variables are the followings.
     ### Response
 
     ```
-    Status: <: $result.status :>
+    Status:       <: $result.status :>
+    Content-Type: <: $result.response_content_type :>
     Response:
-    <: $result.response :>
+    <: $result.response_body :>
     : }
     ```
 

@@ -97,18 +97,19 @@ sub _api_ok {
     my $parsed_response = Test::JsonAPI::Autodoc::Response->new->parse($res);
 
     push @$results, {
-        note          => $note,
+        note                  => $note,
 
-        path          => $parsed_request->{path},
-        server        => $parsed_request->{server},
-        method        => $parsed_request->{method},
-        query         => $parsed_request->{query},
-        content_type  => $parsed_request->{content_type},
-        parameters    => $parsed_request->{parameters},
-        is_plack_app  => $is_plack_app,
+        path                  => $parsed_request->{path},
+        server                => $parsed_request->{server},
+        method                => $parsed_request->{method},
+        query                 => $parsed_request->{query},
+        request_content_type  => $parsed_request->{content_type},
+        request_parameters    => $parsed_request->{parameters},
+        is_plack_app          => $is_plack_app,
 
-        status        => $expected_code,
-        response      => $parsed_response->{body},
+        status                => $expected_code,
+        response_body         => $parsed_response->{body},
+        response_content_type => $parsed_response->{content_type},
     };
 }
 1;
@@ -354,13 +355,17 @@ Available variables are the followings.
 
 =item * result.query
 
-=item * result.content_type
+=item * result.request_content_type
 
-=item * result.parameters
+=item * result.request_parameters
+
+=item * result.is_plack_app
 
 =item * result.status
 
-=item * result.response
+=item * result.response_body
+
+=item * result.response_content_type
 
 =back
 
@@ -389,12 +394,12 @@ Available variables are the followings.
     :}
     ### Parameters
 
-    : if $result.parameters {
-        : if $result.content_type {
-    __<: $result.content_type :>__
+    : if $result.request_parameters {
+        : if $result.request_content_type {
+    __<: $result.request_content_type :>__
 
         : }
-    : for $result.parameters -> $parameter {
+    : for $result.request_parameters -> $parameter {
     <: $parameter :>
     : }
     : }
@@ -413,9 +418,10 @@ Available variables are the followings.
     ### Response
 
     ```
-    Status: <: $result.status :>
+    Status:       <: $result.status :>
+    Content-Type: <: $result.response_content_type :>
     Response:
-    <: $result.response :>
+    <: $result.response_body :>
     : }
     ```
 

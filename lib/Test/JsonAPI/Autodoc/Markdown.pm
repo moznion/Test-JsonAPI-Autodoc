@@ -74,12 +74,12 @@ generated at: <: $generated_at :>
 :}
 ### Parameters
 
-: if $result.parameters {
-    : if $result.content_type {
-__<: $result.content_type :>__
+: if $result.request_parameters {
+    : if $result.request_content_type {
+__<: $result.request_content_type :>__
 
     : }
-: for $result.parameters -> $parameter {
+: for $result.request_parameters -> $parameter {
 <: $parameter :>
 : }
 : }
@@ -98,9 +98,10 @@ Not required
 ### Response
 
 ```
-Status: <: $result.status :>
+Status:       <: $result.status :>
+Content-Type: <: $result.response_content_type :>
 Response:
-<: $result.response :>
+<: $result.response_body :>
 : }
 ```
 

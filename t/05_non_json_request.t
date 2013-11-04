@@ -64,7 +64,8 @@ POST /foobar
 ### Response
 
 ```
-Status: 200
+Status:       200
+Content-Type: application/json
 Response:
 {
    "message" : "success"
