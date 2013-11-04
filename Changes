@@ -2,6 +2,12 @@ Revision history for Perl extension Test-JsonAPI-Autodoc
 
 {{$NEXT}}
 
+0.11 2013-11-04T13:50:46Z
+
+    - Update default markdown template
+    - Add some samples
+    - Change inner structure of module
+
 0.10 2013-11-03T14:53:37Z
 
     - Support `Plack::Test`

@@ -19,7 +19,7 @@ our @EXPORT = qw/
     set_template
 /;
 
-our $VERSION = "0.10";
+our $VERSION = "0.11";
 
 my $in_describe;
 my $results;

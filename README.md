@@ -48,8 +48,8 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
-            "id": 1,
-            "message": "blah blah"
+                "id": 1,
+                "message": "blah blah"
             }
         });
         plack_ok($test_app, $req, 200, "get message ok");
@@ -116,7 +116,7 @@ The example of `test.t` is as follows.
 The following markdown document are outputted after execution of a test.
 Document will output to `$project\_root/docs/test.md` on default setting.
 
-    generated at: 2013-11-03 22:29:06
+    generated at: 2013-11-04 22:41:10
 
     ## POST /foo
 
@@ -140,7 +140,8 @@ Document will output to `$project\_root/docs/test.md` on default setting.
     ### Response
 
     ```
-    Status: 200
+    Status:       200
+    Content-Type: application/json
     Response:
     {
        "message" : "success"
@@ -283,6 +284,18 @@ Available variables are the followings.
     ```
 
 Template needs to be written by [Text::Xslate::Syntax::Kolon](http://search.cpan.org/perldoc?Text::Xslate::Syntax::Kolon) as looking.
+
+
+
+# FAQ
+
+#### Does this module correspond to JSON-RPC?
+
+Yes. It can use as [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json\_rpc.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json\_rpc.t).
+
+#### Can methods of [Test::More](http://search.cpan.org/perldoc?Test::More) (e.g. `subtest()`) be called in `describe()`?
+
+Yes, of course!
 
 
 
