@@ -167,8 +167,8 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
         $req->header('Content-Type' => 'application/json');
         $req->content(q{
             {
-            "id": 1,
-            "message": "blah blah"
+                "id": 1,
+                "message": "blah blah"
             }
         });
         plack_ok($test_app, $req, 200, "get message ok");
@@ -234,7 +234,7 @@ The example of F<test.t> is as follows.
 The following markdown document are outputted after execution of a test.
 Document will output to F<$project_root/docs/test.md> on default setting.
 
-    generated at: 2013-11-03 22:29:06
+    generated at: 2013-11-04 22:41:10
 
     ## POST /foo
 
@@ -258,7 +258,8 @@ Document will output to F<$project_root/docs/test.md> on default setting.
     ### Response
 
     ```
-    Status: 200
+    Status:       200
+    Content-Type: application/json
     Response:
     {
        "message" : "success"
@@ -436,7 +437,8 @@ Yes. It can use as L<https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master
 
 =head4 Can methods of L<Test::More> (e.g. C<subtest()>) be called in C<describe()>?
 
-Yes, of course!!
+Yes, of course!
+
 
 =head1 INSPIRED
 

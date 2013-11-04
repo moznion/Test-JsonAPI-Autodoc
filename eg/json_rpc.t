@@ -7,6 +7,7 @@ use HTTP::Request::Common;
 use JSON qw/to_json/;
 
 use Plack::Test;
+
 use Test::More;
 use Test::JsonAPI::Autodoc;
 
@@ -35,6 +36,7 @@ describe 'POST /' => sub {
     });
     my $req = POST '/';
     $req->header('Content-Type' => 'application/json');
+    $req->header('Content-Length' => length $json);
     $req->content($json);
     plack_ok($test_app, $req, 200, "get message ok");
 };

@@ -1,4 +1,4 @@
-generated at: 2013-11-03 22:39:36
+generated at: 2013-11-04 22:41:11
 
 ## POST /
 
@@ -24,7 +24,8 @@ POST /
 ### Response
 
 ```
-Status: 200
+Status:       200
+Content-Type: application/json
 Response:
 {
    "message" : "Hello"
@@ -56,7 +57,8 @@ POST /foo
 ### Response
 
 ```
-Status: 200
+Status:       200
+Content-Type: application/json
 Response:
 {
    "message" : "Goodbye"

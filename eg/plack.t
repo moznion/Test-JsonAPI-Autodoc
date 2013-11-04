@@ -11,10 +11,6 @@ use Plack::Test;
 use Test::More;
 use Test::JsonAPI::Autodoc;
 
-BEGIN {
-    $ENV{TEST_JSONAPI_AUTODOC} = 1;
-}
-
 # Plack App
 my $app = sub {
     my $env = shift;
