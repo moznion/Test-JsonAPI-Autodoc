@@ -114,7 +114,7 @@ The example of `test.t` is as follows.
     };
 
 The following markdown document are outputted after execution of a test.
-Document will output to `$project\_root/docs/test.md` on default setting.
+Document will output to `$project_root/docs/test.md` on default setting.
 
     generated at: 2013-11-04 22:41:10
 
@@ -176,7 +176,7 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
 - plack\_ok ($plack\_app, $request, $expected\_status\_code, $note)
 
     `plack_ok` method carries out almost the same operation as `http_ok`.
-    This method is for [Plack](http://search.cpan.org/perldoc?Plack) application.
+    This method is for [Plack](https://metacpan.org/pod/Plack) application.
     This method requires plack application as the first argument.
 
 - set\_documents\_path
@@ -193,7 +193,7 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
 
 # REQUIREMENTS
 
-Generated document will output to `$project\_root/docs/` on default setting.
+Generated document will output to `$project_root/docs/` on default setting.
 $project\_root means the directory on which `cpanfile` discovered while going
 back to a root directory from a test script is put.
 Therefore, __it is necessary to put `cpanfile` on a project root__.
@@ -283,7 +283,7 @@ Available variables are the followings.
     ```
     : }
 
-Template needs to be written by [Text::Xslate::Syntax::Kolon](http://search.cpan.org/perldoc?Text::Xslate::Syntax::Kolon) as looking.
+Template needs to be written by [Text::Xslate::Syntax::Kolon](https://metacpan.org/pod/Text::Xslate::Syntax::Kolon) as looking.
 
 
 
@@ -291,9 +291,9 @@ Template needs to be written by [Text::Xslate::Syntax::Kolon](http://search.cpan
 
 #### Does this module correspond to JSON-RPC?
 
-Yes. It can use as [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json\_rpc.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json\_rpc.t).
+Yes. It can use as [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json_rpc.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json_rpc.t).
 
-#### Can methods of [Test::More](http://search.cpan.org/perldoc?Test::More) (e.g. `subtest()`) be called in `describe()`?
+#### Can methods of [Test::More](https://metacpan.org/pod/Test::More) (e.g. `subtest()`) be called in `describe()`?
 
 Yes, of course!
 
