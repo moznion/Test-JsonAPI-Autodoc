@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc)
+[![Build Status](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc) [![Coverage Status](https://coveralls.io/repos/moznion/Test-JsonAPI-Autodoc/badge.png?branch=master)](https://coveralls.io/r/moznion/Test-JsonAPI-Autodoc?branch=master)
 # NAME
 
 Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
