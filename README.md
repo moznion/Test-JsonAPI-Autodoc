@@ -139,10 +139,10 @@ Document will output to `$project\_root/docs/test.md` on default setting.
 
     ### Response
 
-    ```
-    Status:       200
-    Content-Type: application/json
-    Response:
+    - Status:       200
+    - Content-Type: application/json
+
+    ```json
     {
        "message" : "success"
     }
@@ -275,13 +275,13 @@ Available variables are the followings.
 
     ### Response
 
-    ```
-    Status:       <: $result.status :>
-    Content-Type: <: $result.response_content_type :>
-    Response:
+    - Status:       <: $result.status :>
+    - Content-Type: <: $result.response_content_type :>
+
+    ```json
     <: $result.response_body :>
-    : }
     ```
+    : }
 
 Template needs to be written by [Text::Xslate::Syntax::Kolon](http://search.cpan.org/perldoc?Text::Xslate::Syntax::Kolon) as looking.
 
