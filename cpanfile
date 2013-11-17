@@ -21,6 +21,8 @@ on test => sub {
     requires 'HTTP::Request::Common';
     requires 'HTTP::Response';
     requires 'Test::Mock::LWP::Conditional';
+    requires 'Plack::Test';
+    requires 'Plack::Request';
 };
 
 on develop => sub {
