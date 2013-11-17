@@ -99,6 +99,7 @@ Not required
 
 - Status:       <: $result.status :>
 - Content-Type: <: $result.response_content_type :>
+
 ```json
 <: $result.response_body :>
 ```
