@@ -108,10 +108,10 @@ POST /
 
 ### Response
 
-```
-Status:       200
-Content-Type: application/json
-Response:
+- Status:       200
+- Content-Type: application/json
+
+```json
 {
    "message" : "success"
 }
@@ -141,10 +141,10 @@ POST /
 
 ### Response
 
-```
-Status:       200
-Content-Type: application/json
-Response:
+- Status:       200
+- Content-Type: application/json
+
+```json
 {
    "message" : "success"
 }
@@ -174,10 +174,10 @@ POST /not-exist
 
 ### Response
 
-```
-Status:       404
-Content-Type: text/plain
-Response:
+- Status:       404
+- Content-Type: text/plain
+
+```json
 Not found
 ```
 

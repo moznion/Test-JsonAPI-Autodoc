@@ -92,10 +92,10 @@ POST /foobar
 
 ### Response
 
-```
-Status:       200
-Content-Type: application/json
-Response:
+- Status:       200
+- Content-Type: application/json
+
+```json
 {
    "message" : "success"
 }
@@ -119,10 +119,10 @@ POST /bad
 
 ### Response
 
-```
-Status:       400
-Content-Type: text/plain
-Response:
+- Status:       400
+- Content-Type: text/plain
+
+```json
 400 URL must be absolute
 
 ```

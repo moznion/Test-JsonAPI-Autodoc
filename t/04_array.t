@@ -109,10 +109,10 @@ POST /foobar
 
 ### Response
 
-```
-Status:       200
-Content-Type: application/json
-Response:
+- Status:       200
+- Content-Type: application/json
+
+```json
 {
    "message" : "success"
 }
