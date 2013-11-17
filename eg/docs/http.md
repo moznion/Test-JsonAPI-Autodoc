@@ -1,4 +1,4 @@
-generated at: 2013-11-17 14:40:16
+generated at: 2013-11-17 14:48:09
 
 ## POST /foo
 
@@ -23,8 +23,6 @@ POST /foo
 
 - Status:       200
 - Content-Type: application/json
-- Response:
-
 ```json
 {
    "message" : "success"

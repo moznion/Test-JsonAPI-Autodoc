@@ -1,4 +1,4 @@
-generated at: 2013-11-17 14:41:56
+generated at: 2013-11-17 14:48:12
 
 ## POST /
 
@@ -28,8 +28,6 @@ POST /
 
 - Status:       200
 - Content-Type: application/json
-- Response:
-
 ```json
 {
    "jsonrpc" : "2.0",
