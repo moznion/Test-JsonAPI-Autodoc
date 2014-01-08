@@ -21,7 +21,8 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
                 "message": "blah blah"
             }
         });
-        http_ok($req, 200, "returns response"); # <= Check status whether 200, and generate documents
+        my $res = http_ok($req, 200, "returns response"); # <= Check status whether 200, and generate documents.
+                                                          #    And this test method returns the response as hash reference.
     };
 
     # Can also request application/x-www-form-urlencoded
@@ -76,7 +77,7 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
 
 Test::JsonAPI::Autodoc tests JSON API response (only check status code).
 And it generates API documents according to the response automatically.
-Please refer to ["USAGE"](#USAGE) for details.
+Please refer to ["USAGE"](#usage) for details.
 
 __THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.__
 
@@ -173,11 +174,23 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
 
     When this method is not called at inside of `describe`, documents is not generated.
 
+    And this method returns the response as hash reference.
+
+    Example of response structure;
+
+        $response = {
+            status       => <% status code %>,
+            content_type => <% content type %>,
+            body         => <% response body %>,
+        }
+
 - plack\_ok ($plack\_app, $request, $expected\_status\_code, $note)
 
     `plack_ok` method carries out almost the same operation as `http_ok`.
     This method is for [Plack](https://metacpan.org/pod/Plack) application.
     This method requires plack application as the first argument.
+
+    This method also returns the response as hash reference.
 
 - set\_documents\_path
 
@@ -187,7 +200,7 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
 - set\_template
 
     Set the original template. This method require the string.
-    Please refer to ["CUSTOM TEMPLATE"](#CUSTOM TEMPLATE) for details.
+    Please refer to ["CUSTOM TEMPLATE"](#custom-template) for details.
 
 
 

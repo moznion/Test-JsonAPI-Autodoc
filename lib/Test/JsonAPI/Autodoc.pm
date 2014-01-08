@@ -149,7 +149,8 @@ Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
                 "message": "blah blah"
             }
         });
-        http_ok($req, 200, "returns response"); # <= Check status whether 200, and generate documents
+        my $res = http_ok($req, 200, "returns response"); # <= Check status whether 200, and generate documents.
+                                                          #    And this test method returns the response as hash reference.
     };
 
     # Can also request application/x-www-form-urlencoded
@@ -301,11 +302,23 @@ C<$note> will be note of markdown documents.
 
 When this method is not called at inside of C<describe>, documents is not generated.
 
+And this method returns the response as hash reference.
+
+Example of response structure;
+
+    $response = {
+        status       => <% status code %>,
+        content_type => <% content type %>,
+        body         => <% response body %>,
+    }
+
 =item * plack_ok ($plack_app, $request, $expected_status_code, $note)
 
 C<plack_ok> method carries out almost the same operation as C<http_ok>.
 This method is for L<Plack> application.
 This method requires plack application as the first argument.
+
+This method also returns the response as hash reference.
 
 =item * set_documents_path
 
