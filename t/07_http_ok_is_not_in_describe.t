@@ -15,7 +15,7 @@ BEGIN {
     $ENV{TEST_JSONAPI_AUTODOC} = 1;
 }
 
-my $tempdir = Path::Tiny->tempdir;
+my $tempdir = Path::Tiny->tempdir('test-jsonapi-autodoc-XXXXXXXX');
 set_documents_path($tempdir);
 
 my $ok_res = HTTP::Response->new(200);
