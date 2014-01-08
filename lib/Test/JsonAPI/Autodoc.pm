@@ -67,12 +67,12 @@ sub describe {
 
 sub http_ok {
     my ($req, $expected_code, $note) = @_;
-    _api_ok($req, $expected_code, $note);
+    return _api_ok($req, $expected_code, $note);
 }
 
 sub plack_ok {
     my ($plack_app, $req, $expected_code, $note) = @_;
-    _api_ok($req, $expected_code, $note, $plack_app);
+    return _api_ok($req, $expected_code, $note, $plack_app);
 }
 
 sub _api_ok {
@@ -96,6 +96,9 @@ sub _api_ok {
     my $parsed_request  = Test::JsonAPI::Autodoc::Request->new->parse($req);
     my $parsed_response = Test::JsonAPI::Autodoc::Response->new->parse($res);
 
+    my $response_body         = $parsed_response->{body};
+    my $response_content_type = $parsed_response->{content_type};
+
     push @$results, {
         note                  => $note,
 
@@ -108,8 +111,14 @@ sub _api_ok {
         is_plack_app          => $is_plack_app,
 
         status                => $expected_code,
-        response_body         => $parsed_response->{body},
-        response_content_type => $parsed_response->{content_type},
+        response_body         => $response_body,
+        response_content_type => $response_content_type,
+    };
+
+    return +{
+        status       => $expected_code,
+        body         => $response_body,
+        content_type => $response_content_type,
     };
 }
 1;

@@ -39,7 +39,16 @@ subtest '200 OK' => sub {
                 "message": "blah blah"
             }
         });
-        http_ok($req, 200, "get message ok");
+        my $res = http_ok($req, 200, "get message ok");
+        is_deeply $res, {
+            status       => 200,
+            content_type => 'application/json',
+            body         => <<'...',
+{
+   "message" : "success"
+}
+...
+        }, 'Response is rightly';
     };
 
 };
@@ -54,7 +63,12 @@ subtest '400 Bad Request' => sub {
                 "message": "blah blah"
             }
         });
-        http_ok($req, 400, "get 400 ok");
+        my $res = http_ok($req, 400, "get 400 ok");
+        is_deeply $res, {
+            status       => 400,
+            content_type => 'text/plain',
+            body         => "400 URL must be absolute\n",
+        }, 'Response is rightly';
     };
 };
 
