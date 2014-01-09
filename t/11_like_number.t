@@ -54,29 +54,6 @@ subtest 'request content includes value like number' => sub {
 
 };
 
-subtest 'request content includes null value' => sub {
-    describe 'POST /foobar' => sub {
-        my $req = POST 'http://localhost:3000/foobar';
-        $req->header('Content-Type' => 'application/json');
-        $req->content(q{
-            {
-                "id": 1,
-                "message": null
-            }
-        });
-        my $res = http_ok($req, 200, "get message ok");
-        is_deeply $res, {
-            status       => 200,
-            content_type => 'application/json',
-            body         => <<'...',
-{
-   "message" : "success"
-}
-...
-        }, 'Response is rightly';
-    };
-};
-
 (my $filename = path($0)->basename) =~ s/\.t$//;
 $filename .= '.md';
 my $fh = path("$tempdir/$filename")->openr_utf8;
@@ -106,37 +83,6 @@ __application/json__
 - `ipaddr`: String (e.g. "192.168.1.1")
 - `message`: String (e.g. "10blah")
 - `string_id`: String (e.g. "1")
-
-### Request
-
-POST /foobar
-
-### Response
-
-- Status:       200
-- Content-Type: application/json
-
-```json
-{
-   "message" : "success"
-}
-
-```
-
-## POST /foobar
-
-get message ok
-
-### Target Server
-
-http://localhost:3000
-
-### Parameters
-
-__application/json__
-
-- `id`: Number (e.g. 1)
-- `message`: Nullable
 
 ### Request
 
