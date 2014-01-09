@@ -77,7 +77,13 @@ sub _parse_json_hash {
         foreach my $key (@keys) {
             my $value = $request_parameters->{$key};
             if ($value =~ /^\d+$/) {
-                push @parameters, "$indent- `$key`: Number (e.g. $value)";
+                # detect number or string internally
+                if (($value ^ $value) eq '0') {
+                    push @parameters, "$indent- `$key`: Number (e.g. $value)";
+                }
+                else {
+                    push @parameters, qq{$indent- `$key`: String (e.g. "$value")};
+                }
             }
             elsif (ref $value eq 'HASH') {
                 push @parameters, "$indent- `$key`: JSON";

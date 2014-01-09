@@ -35,6 +35,7 @@ subtest 'LikeNumber' => sub {
         $req->content(q{
             {
                 "id": 1,
+                "string_id": "1",
                 "ipaddr": "192.168.1.1",
                 "message": "10blah"
             }
@@ -81,6 +82,7 @@ __application/json__
 - `id`: Number (e.g. 1)
 - `ipaddr`: String (e.g. "192.168.1.1")
 - `message`: String (e.g. "10blah")
+- `string_id`: String (e.g. "1")
 
 ### Request
 
