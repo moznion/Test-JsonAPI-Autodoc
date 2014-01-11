@@ -24,7 +24,7 @@ sub parse {
     my $content_type = $req->content_type;
 
     my $is_json = 0;
-    if($content_type =~ m!^application/json!) {
+    if ($content_type =~ m!^application/json!) {
         $body = to_json(from_json($req->decoded_content), { pretty => 1 });
         $is_json = 1;
     }
@@ -48,7 +48,7 @@ sub _parse_request_parameters {
     my ($self, $request_parameters, $is_json) = @_;
 
     my $parameters;
-    if($is_json) {
+    if ($is_json) {
         $request_parameters = JSON::decode_json($request_parameters);
         $parameters = $self->_parse_json_hash($request_parameters);
     }
