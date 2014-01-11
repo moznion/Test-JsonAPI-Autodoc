@@ -89,6 +89,10 @@ sub _api_ok {
         $res = LWP::UserAgent->new->request($req);
     }
 
+    # change location of test failure to be included Test::More's output
+    # to be more helpful to user.
+    local $Test::Builder::Level = $Test::Builder::Level + 2;
+
     my $result = Test::More::is $res->code, $expected_code;
     return unless $result;
     return unless $in_describe;
