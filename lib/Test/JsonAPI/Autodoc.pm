@@ -82,6 +82,13 @@ sub plack_ok {
 sub _api_ok {
     my ($req, $expected_code, $note, $plack_app) = @_;
 
+    my $description       = $note;
+    my $param_description = {};
+    if (ref $note eq 'HASH') {
+        $description       = $note->{description};
+        $param_description = $note->{param_description};
+    }
+
     my $res;
     my $is_plack_app = 0;
     if ($plack_app) { # for Plack::Test
@@ -101,14 +108,14 @@ sub _api_ok {
     return unless $result;
     return unless $in_describe;
 
-    my $parsed_request  = Test::JsonAPI::Autodoc::Request->new->parse($req);
+    my $parsed_request  = Test::JsonAPI::Autodoc::Request->new->parse($req, $param_description);
     my $parsed_response = Test::JsonAPI::Autodoc::Response->new->parse($res);
 
     my $response_body         = $parsed_response->{body};
     my $response_content_type = $parsed_response->{content_type};
 
     push @$results, {
-        note                  => $note,
+        note                  => $description,
 
         path                  => $parsed_request->{path},
         server                => $parsed_request->{server},

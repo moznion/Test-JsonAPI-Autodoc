@@ -39,7 +39,13 @@ subtest '200 OK' => sub {
                 "message": "blah blah"
             }
         });
-        my $res = http_ok($req, 200, "get message ok");
+        my $res = http_ok($req, 200, {
+            description => "get message ok",
+            param_description => {
+                id      => 'Some ID',
+                message => 'Yay yay!',
+            },
+        });
         is_deeply $res, {
             status       => 200,
             content_type => 'application/json',
@@ -97,8 +103,8 @@ http://localhost:3000
 
 __application/json__
 
-- `id`: Number (e.g. 1)
-- `message`: String (e.g. "blah blah")
+- `id`: Number (e.g. 1) - Some ID
+- `message`: String (e.g. "blah blah") - Yay yay!
 
 ### Request
 
