@@ -180,6 +180,22 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
             body         => <% response body %>,
         }
 
+    Moreover if `$note` is hash reference like below, you can describe each request parameters.
+
+        {
+            description => 'get message ok',
+            param_description => {
+                param1 => 'This is param1'
+                param2 => 'This is param2',
+            },
+        }
+
+    `description` is the same as the time of using as <$note> as scalar.
+    `param_description` contains descriptions about request parameters.
+    Now, this faculty only can describe request parameters are belonging to top level.
+    Please refer [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http_with_req_params_description.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http_with_req_params_description.t) and
+    [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http_with_req_params_description.md](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http_with_req_params_description.md).
+
 - plack\_ok ($plack\_app, $request, $expected\_status\_code, $note)
 
     `plack_ok` method carries out almost the same operation as `http_ok`.

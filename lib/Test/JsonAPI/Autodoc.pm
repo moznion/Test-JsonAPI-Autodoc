@@ -324,6 +324,22 @@ Example of response structure;
         body         => <% response body %>,
     }
 
+Moreover if C<$note> is hash reference like below, you can describe each request parameters.
+
+    {
+        description => 'get message ok',
+        param_description => {
+            param1 => 'This is param1'
+            param2 => 'This is param2',
+        },
+    }
+
+C<description> is the same as the time of using as <$note> as scalar.
+C<param_description> contains descriptions about request parameters.
+Now, this faculty only can describe request parameters are belonging to top level.
+Please refer L<https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http_with_req_params_description.t> and
+L<https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http_with_req_params_description.md>.
+
 =item * plack_ok ($plack_app, $request, $expected_status_code, $note)
 
 C<plack_ok> method carries out almost the same operation as C<http_ok>.
