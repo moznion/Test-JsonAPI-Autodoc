@@ -74,7 +74,7 @@ sub _parse_json_hash {
     if (ref $request_parameters eq 'HASH') {
         my @keys = keys %$request_parameters;
         @keys = sort {$a cmp $b} @keys;
-        foreach my $key (@keys) {
+        for my $key (@keys) {
             my $value = $request_parameters->{$key};
             if ( ! defined $value) {
                 push @parameters, "$indent- `$key`: Nullable";
@@ -102,7 +102,7 @@ sub _parse_json_hash {
         }
     }
     else {
-        foreach my $value (@$request_parameters) {
+        for my $value (@$request_parameters) {
             if ($value =~ /^\d/) {
                 push @parameters, "$indent- Number (e.g. $value)";
             }
