@@ -2,6 +2,13 @@ Revision history for Perl extension Test-JsonAPI-Autodoc
 
 {{$NEXT}}
 
+0.20 2014-01-12T15:34:11Z
+
+    - Change to return the response by test methods
+    - Result of the test became pretty! (@y-uuki++)
+    - Add some types into description of request parameters (@y-uuki++)
+    - Change to describable request parameters (EXPERIMENTAL!)
+
 0.11 2013-11-04T13:50:46Z
 
     - Update default markdown template

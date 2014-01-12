@@ -141,7 +141,7 @@ __END__
 
 =encoding utf-8
 
-=for stopwords autodoc coderef
+=for stopwords autodoc coderef y-uuki
 
 =head1 NAME
 

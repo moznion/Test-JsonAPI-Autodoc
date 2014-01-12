@@ -50,7 +50,7 @@
             "Data::Section::Simple" : "0",
             "JSON" : "0",
             "LWP::UserAgent" : "0",
-            "Path::Tiny" : "0",
+            "Path::Tiny" : "0.051",
             "Scope::Guard" : "0",
             "Test::More" : "0.98",
             "Text::Xslate" : "0",
@@ -83,5 +83,8 @@
          "web" : "https://github.com/moznion/Test-JsonAPI-Autodoc"
       }
    },
-   "version" : "0.11"
+   "version" : "0.20",
+   "x_contributors" : [
+      "y_uuki <yuki.tsubo@gmail.com>"
+   ]
 }
