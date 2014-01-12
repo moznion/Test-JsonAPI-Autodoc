@@ -57,6 +57,10 @@ sub describe {
 
     my ($description, $coderef) = @_;
 
+    # change location of test failure to be included Test::More's output
+    # to be more helpful to user.
+    local $Test::Builder::Level = $Test::Builder::Level + 1;
+
     my $result = Test::More::subtest($description => $coderef);
 
     if ($result && $results && $ENV{TEST_JSONAPI_AUTODOC}) {
@@ -88,6 +92,10 @@ sub _api_ok {
     else {
         $res = LWP::UserAgent->new->request($req);
     }
+
+    # change location of test failure to be included Test::More's output
+    # to be more helpful to user.
+    local $Test::Builder::Level = $Test::Builder::Level + 2;
 
     my $result = Test::More::is $res->code, $expected_code;
     return unless $result;
