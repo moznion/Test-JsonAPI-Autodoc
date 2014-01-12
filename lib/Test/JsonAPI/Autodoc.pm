@@ -222,9 +222,6 @@ Test::JsonAPI::Autodoc tests JSON API response (only check status code).
 And it generates API documents according to the response automatically.
 Please refer to L<"USAGE"> for details.
 
-B<THIS IS A DEVELOPMENT RELEASE. API MAY CHANGE WITHOUT NOTICE.>
-
-
 =head1 USAGE
 
 A document will be generated if C<describe> is used instead of C<Test::More::subtest>.
@@ -483,11 +480,13 @@ This module is inspired by “autodoc”, which is written by Ruby. That is very
 
 See also L<https://github.com/r7kamura/autodoc>
 
+=head1 CONTRIBUTORS
 
-=head1 NOTE
+=over 4
 
-This module is developing. I think that there is much bug in this module. I am waiting for your report!
+=item * Yuuki Tsubouchi (y-uuki)
 
+=back
 
 =head1 LICENSE
 
