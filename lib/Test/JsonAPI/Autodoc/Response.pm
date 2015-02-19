@@ -17,7 +17,7 @@ sub parse {
     my $body         = $res->content;
     my $content_type = $res->content_type;
     if ($content_type =~ m!^application/json!) {
-        $body = to_json(from_json($res->decoded_content), { pretty => 1 });
+        $body = to_json(from_json($res->decoded_content), { pretty => 1, canonical => 1 });
     }
 
     return {
