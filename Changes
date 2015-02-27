@@ -2,6 +2,10 @@ Revision history for Perl extension Test-JsonAPI-Autodoc
 
 {{$NEXT}}
 
+0.21 2015-02-27T04:32:13Z
+
+    - Force to sort order of a response parameters of generated API documentations (@meru-akimbo).
+
 0.20 2014-01-12T15:34:11Z
 
     - Change to return the response by test methods

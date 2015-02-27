@@ -1,9 +1,7 @@
-[![Build Status](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc.png?branch=master)](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc) [![Coverage Status](https://coveralls.io/repos/moznion/Test-JsonAPI-Autodoc/badge.png?branch=master)](https://coveralls.io/r/moznion/Test-JsonAPI-Autodoc?branch=master)
+[![Build Status](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc.svg?branch=master)](https://travis-ci.org/moznion/Test-JsonAPI-Autodoc) [![Coverage Status](https://img.shields.io/coveralls/moznion/Test-JsonAPI-Autodoc/master.svg)](https://coveralls.io/r/moznion/Test-JsonAPI-Autodoc?branch=master)
 # NAME
 
 Test::JsonAPI::Autodoc - Test JSON API response and auto generate API documents
-
-
 
 # SYNOPSIS
 
@@ -89,7 +87,7 @@ Run test as follows.
 
     $ TEST_JSONAPI_AUTODOC=1 prove t/test.t
 
-If `TEST_JSONAPI_AUTODOC` doesn't have true value, __documents will not generate__.
+If `TEST_JSONAPI_AUTODOC` doesn't have true value, **documents will not generate**.
 
 The example of `test.t` is as follows.
 
@@ -148,8 +146,6 @@ Document will output to `$project_root/docs/test.md` on default setting.
 
 Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg)).
 
-
-
 # METHODS
 
 - describe ($description, \\&coderef)
@@ -159,7 +155,7 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
 
     `$description` will be headline of markdown documents.
 
-    __\*\*\* DO NOT USE THIS METHOD AS NESTING \*\*\*__
+    **\*\*\* DO NOT USE THIS METHOD AS NESTING \*\*\***
 
 - http\_ok ($request, $expected\_status\_code, $note)
 
@@ -193,8 +189,8 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
     `description` is the same as the time of using as <$note> as scalar.
     `param_description` contains descriptions about request parameters.
     Now, this faculty only can describe request parameters are belonging to top level.
-    Please refer [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http_with_req_params_description.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http_with_req_params_description.t) and
-    [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http_with_req_params_description.md](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http_with_req_params_description.md).
+    Please refer [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http\_with\_req\_params\_description.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/http_with_req_params_description.t) and
+    [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http\_with\_req\_params\_description.md](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/doc/http_with_req_params_description.md).
 
 - plack\_ok ($plack\_app, $request, $expected\_status\_code, $note)
 
@@ -214,24 +210,18 @@ Please also refer to example ([https://github.com/moznion/Test-JsonAPI-Autodoc/t
     Set the original template. This method require the string.
     Please refer to ["CUSTOM TEMPLATE"](#custom-template) for details.
 
-
-
 # REQUIREMENTS
 
 Generated document will output to `$project_root/docs/` on default setting.
 $project\_root means the directory on which `cpanfile` discovered while going
 back to a root directory from a test script is put.
-Therefore, __it is necessary to put `cpanfile` on a project root__.
-
-
+Therefore, **it is necessary to put `cpanfile` on a project root**.
 
 # CONFIGURATION AND ENVIRONMENT
 
 - TEST\_JSONAPI\_AUTODOC
 
     Documents are generated when true value is set to this environment variable.
-
-
 
 # CUSTOM TEMPLATE
 
@@ -310,19 +300,15 @@ Available variables are the followings.
 
 Template needs to be written by [Text::Xslate::Syntax::Kolon](https://metacpan.org/pod/Text::Xslate::Syntax::Kolon) as looking.
 
-
-
 # FAQ
 
 #### Does this module correspond to JSON-RPC?
 
-Yes. It can use as [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json_rpc.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json_rpc.t).
+Yes. It can use as [https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json\_rpc.t](https://github.com/moznion/Test-JsonAPI-Autodoc/tree/master/eg/json_rpc.t).
 
 #### Can methods of [Test::More](https://metacpan.org/pod/Test::More) (e.g. `subtest()`) be called in `describe()`?
 
 Yes, of course!
-
-
 
 # INSPIRED
 
@@ -340,8 +326,6 @@ Copyright (C) moznion.
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself.
-
-
 
 # AUTHOR
 
