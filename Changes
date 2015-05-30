@@ -2,6 +2,10 @@ Revision history for Perl extension Test-JsonAPI-Autodoc
 
 {{$NEXT}}
 
+0.22 2015-05-30T03:53:42Z
+
+    - Fix bug about multi-byte characters (@satetsu888++)
+
 0.21 2015-02-27T04:32:13Z
 
     - Force to sort order of a response parameters of generated API documentations (@meru-akimbo).

@@ -84,9 +84,10 @@
          "web" : "https://github.com/moznion/Test-JsonAPI-Autodoc"
       }
    },
-   "version" : "0.21",
+   "version" : "0.22",
    "x_contributors" : [
       "y_uuki <yuki.tsubo@gmail.com>",
-      "meru_akimbo <merukatoruayu0@gmail.com>"
+      "meru_akimbo <merukatoruayu0@gmail.com>",
+      "shotaro.akiyama <satetsu888@gmail.com>"
    ]
 }
